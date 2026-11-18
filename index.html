@@ -1,0 +1,2628 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="artifact-type" content="tool">
+  <meta name="design-style" content="bauhaus">
+  <title>Kuis Beregu Fisika XI — Usaha dan Energi</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.18.2/dist/katex.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/katex@0.18.2/dist/katex.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/katex@0.18.2/dist/contrib/auto-render.min.js"></script>
+  <script src="https://unpkg.com/lucide@1.43.0/dist/umd/lucide.min.js"></script>
+
+  <style>
+    :root {
+      color-scheme: light;
+
+      /* Page and surfaces (Bauhaus) */
+      --background: #f5f0e8;
+      --surface-container-low: #f2ede5;
+      --surface-container: #eee9e0;
+      --surface-container-high: #e8e3da;
+
+      /* Ink */
+      --on-surface: #1a1a1a;
+      --on-surface-variant: #4a4a4a;
+
+      /* Lines */
+      --outline: #1a1a1a;
+      --outline-variant: #d0cbc3;
+
+      /* Accents */
+      --primary: #1a1a1a;
+      --on-primary: #ffffff;
+      --primary-container: #ffcc00;
+      --on-primary-container: #1a1a1a;
+      --secondary: #e63b2e;
+      --tertiary: #0055ff;
+      --error: #cc0000;
+      --on-error: #ffffff;
+
+      /* Semantic */
+      --positive: #136f3f;
+      --on-positive: #ffffff;
+      --positive-bg: #dff4e8;
+      --error-bg: #fde8e8;
+      --warning: #9a5800;
+      --backdrop: rgba(26, 26, 26, 0.88);
+      --focus: #0055ff;
+
+      /* Data series */
+      --data-1: #e63b2e;
+      --data-2: #0055ff;
+      --data-3: #1a1a1a;
+      --data-4: #9a7300;
+      --data-context: #b5afa5;
+
+      /* Fonts */
+      --font-headline: 'Space Grotesk', sans-serif;
+      --font-body: 'Inter', sans-serif;
+      --font-label: 'Space Grotesk', sans-serif;
+
+      /* Shape */
+      --rounded: 0.125rem;
+      --rounded-lg: 0.25rem;
+      --rounded-full: 0.75rem;
+
+      /* Effects */
+      --border-thick: 3px solid var(--outline);
+      --border-medium: 2px solid var(--outline);
+      --offset-shadow: 5px 5px 0 var(--outline);
+      --offset-shadow-sm: 3px 3px 0 var(--outline);
+      --rule-heavy: 6px solid var(--outline);
+
+      /* Type scale — Projector-optimized high legibility */
+      --display-size: clamp(2rem, 1.4rem + 2.4vw, 3.25rem);
+      --headline-size: clamp(1.35rem, 1.15rem + 0.95vw, 1.95rem);
+      --subhead-size: clamp(1.125rem, 1.02rem + 0.4vw, 1.35rem);
+      --body-size: clamp(1rem, 0.94rem + 0.28vw, 1.1875rem);
+      --label-size: clamp(0.78rem, 0.74rem + 0.16vw, 0.875rem);
+
+      /* Spacing scale (4pt base) */
+      --space-xs: 0.25rem;
+      --space-sm: 0.5rem;
+      --space-md: 1rem;
+      --space-lg: 1.5rem;
+      --space-xl: 2.5rem;
+      --space-2xl: 4rem;
+      --space-3xl: 6rem;
+
+      /* Motion */
+      --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+      --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+      --dur-micro: 120ms;
+      --dur-short: 220ms;
+      --dur-long: 420ms;
+    }
+
+    body.projector-xl {
+      --display-size: clamp(2.4rem, 1.6rem + 3vw, 3.75rem);
+      --headline-size: clamp(1.6rem, 1.3rem + 1.2vw, 2.35rem);
+      --subhead-size: clamp(1.25rem, 1.1rem + 0.55vw, 1.55rem);
+      --body-size: clamp(1.125rem, 1.04rem + 0.38vw, 1.35rem);
+      --label-size: clamp(0.875rem, 0.82rem + 0.2vw, 1rem);
+    }
+
+    /* Base reset */
+    *, *::before, *::after { box-sizing: border-box; }
+    html, body {
+      overflow-x: clip;
+      margin: 0;
+      padding: 0;
+      background-color: var(--background);
+      color: var(--on-surface);
+      font-family: var(--font-body);
+      font-size: var(--body-size);
+      line-height: 1.55;
+      -webkit-font-smoothing: antialiased;
+    }
+    header { position: static !important; }
+
+    button, input, select, textarea {
+      font-family: inherit;
+      font-size: inherit;
+    }
+
+    :focus-visible {
+      outline: 3px solid var(--focus);
+      outline-offset: 2px;
+    }
+
+    .app-shell {
+      max-width: 1360px;
+      margin: 0 auto;
+      padding: var(--space-lg);
+      display: grid;
+      gap: var(--space-lg);
+    }
+    .app-shell * { min-width: 0; }
+
+    /* Header Masthead */
+    .masthead {
+      border-top: var(--rule-heavy);
+      border-bottom: var(--border-thick);
+      padding-block: var(--space-md);
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: flex-end;
+      gap: var(--space-md);
+    }
+    .masthead-left {
+      display: grid;
+      gap: var(--space-xs);
+    }
+    .kicker {
+      display: inline-block;
+      width: fit-content;
+      font-family: var(--font-label);
+      font-weight: 700;
+      font-size: var(--label-size);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      background: var(--primary);
+      color: var(--on-primary);
+      padding: var(--space-xs) var(--space-sm);
+    }
+    .kicker--blue {
+      background: var(--tertiary);
+      color: var(--on-primary);
+    }
+    .kicker--yellow {
+      background: var(--primary-container);
+      color: var(--on-primary-container);
+      border: var(--border-medium);
+    }
+    .masthead-title {
+      margin: 0;
+      font-family: var(--font-headline);
+      font-weight: 700;
+      font-size: var(--display-size);
+      line-height: 1.02;
+      letter-spacing: -0.03em;
+      color: var(--on-surface);
+    }
+    .masthead-title mark {
+      background: var(--primary-container);
+      color: var(--on-primary-container);
+      padding-inline: var(--space-xs);
+      box-decoration-break: clone;
+    }
+    .masthead-sub {
+      margin: 0;
+      color: var(--on-surface-variant);
+      font-weight: 500;
+      font-size: var(--subhead-size);
+    }
+    .masthead-controls {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: var(--space-sm);
+    }
+
+    /* Bauhaus Block / Cards */
+    .block {
+      border: var(--border-thick);
+      border-radius: var(--rounded);
+      box-shadow: var(--offset-shadow);
+      background: var(--surface-container-low);
+      padding: var(--space-lg);
+    }
+    .block--paper {
+      background: var(--background);
+    }
+    .block--yellow {
+      background: var(--primary-container);
+      color: var(--on-primary-container);
+    }
+    .block--blue {
+      background: var(--tertiary);
+      color: var(--on-primary);
+    }
+    .block--accent-red {
+      border-top: var(--space-sm) solid var(--secondary);
+    }
+    .block--accent-blue {
+      border-top: var(--space-sm) solid var(--tertiary);
+    }
+    .block--accent-yellow {
+      border-top: var(--space-sm) solid var(--primary-container);
+    }
+
+    /* Buttons */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: var(--space-sm);
+      min-height: 44px;
+      padding: var(--space-sm) var(--space-lg);
+      border: var(--border-thick);
+      border-radius: var(--rounded);
+      box-shadow: var(--offset-shadow-sm);
+      background: var(--background);
+      color: var(--on-surface);
+      font-family: var(--font-label);
+      font-weight: 700;
+      font-size: var(--label-size);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      cursor: pointer;
+      transition: transform var(--dur-micro) var(--ease-out),
+                  box-shadow var(--dur-micro) var(--ease-out),
+                  background-color var(--dur-micro) var(--ease-out),
+                  color var(--dur-micro) var(--ease-out);
+    }
+    .btn:hover:not(:disabled) {
+      background: var(--primary);
+      color: var(--on-primary);
+      transform: translate(-1px, -1px);
+      box-shadow: var(--offset-shadow);
+    }
+    .btn:active:not(:disabled) {
+      transform: translate(3px, 3px);
+      box-shadow: none;
+    }
+    .btn:disabled {
+      opacity: 0.45;
+      cursor: not-allowed;
+    }
+    .btn--primary {
+      background: var(--primary-container);
+      color: var(--on-primary-container);
+    }
+    .btn--blue {
+      background: var(--tertiary);
+      color: var(--on-primary);
+    }
+    .btn--danger {
+      background: var(--error);
+      color: var(--on-error);
+    }
+    .btn--lg {
+      min-height: 56px;
+      padding: var(--space-md) var(--space-xl);
+      font-size: var(--body-size);
+    }
+    .btn--sm {
+      min-height: 44px;
+      padding: var(--space-xs) var(--space-md);
+    }
+
+    /* Form Controls */
+    .field-group {
+      display: grid;
+      gap: var(--space-xs);
+    }
+    .field-label {
+      font-family: var(--font-label);
+      font-weight: 700;
+      font-size: var(--label-size);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--on-surface);
+    }
+    .field-hint {
+      font-size: 0.875rem;
+      color: var(--on-surface-variant);
+    }
+    .field-input {
+      width: 100%;
+      min-height: 48px;
+      padding: var(--space-sm) var(--space-md);
+      background: var(--background);
+      color: var(--on-surface);
+      border: var(--border-thick);
+      border-radius: var(--rounded);
+      font-weight: 600;
+      transition: border-color var(--dur-micro) var(--ease-out),
+                  background-color var(--dur-micro) var(--ease-out);
+    }
+    .field-input:focus {
+      outline: 3px solid var(--focus);
+      outline-offset: 2px;
+      border-color: var(--tertiary);
+    }
+
+    .inline-alert {
+      border: var(--border-thick);
+      border-left: var(--space-sm) solid var(--error);
+      background: var(--error-bg);
+      color: var(--error);
+      padding: var(--space-md);
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      gap: var(--space-sm);
+    }
+    .inline-alert[hidden] { display: none; }
+
+    /* Registration Grid */
+    .register-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1.35fr) minmax(0, 1fr);
+      gap: var(--space-xl);
+      align-items: start;
+    }
+    .member-row {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto;
+      gap: var(--space-sm);
+      align-items: end;
+    }
+    .members-list {
+      display: grid;
+      gap: var(--space-md);
+    }
+    .rules-list {
+      margin: 0;
+      padding-left: 1.25rem;
+      display: grid;
+      gap: var(--space-sm);
+    }
+    .topic-chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--space-sm);
+    }
+    .tag {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--space-xs);
+      border: var(--border-medium);
+      border-radius: var(--rounded);
+      padding: var(--space-xs) var(--space-sm);
+      font-family: var(--font-label);
+      font-weight: 700;
+      font-size: var(--label-size);
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      background: var(--background);
+      color: var(--on-surface);
+    }
+    .tag--blue {
+      background: var(--tertiary);
+      color: var(--on-primary);
+    }
+    .tag--yellow {
+      background: var(--primary-container);
+      color: var(--on-primary-container);
+    }
+    .tag--black {
+      background: var(--primary);
+      color: var(--on-primary);
+    }
+    .tag--positive {
+      background: var(--positive);
+      color: var(--on-positive);
+    }
+    .tag--error {
+      background: var(--error);
+      color: var(--on-error);
+    }
+
+    /* Arena / Quiz Screen */
+    .arena-stack {
+      display: grid;
+      gap: var(--space-lg);
+    }
+    .status-bar {
+      border: var(--border-thick);
+      background: var(--surface-container-high);
+      padding: var(--space-md) var(--space-lg);
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      gap: var(--space-md);
+    }
+    .status-team {
+      display: grid;
+      gap: 2px;
+    }
+    .status-team-name {
+      font-family: var(--font-headline);
+      font-weight: 700;
+      font-size: var(--subhead-size);
+      line-height: 1.15;
+    }
+    .status-team-members {
+      font-size: var(--label-size);
+      color: var(--on-surface-variant);
+      font-weight: 600;
+    }
+    .status-metrics {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: var(--space-md);
+    }
+    .hud-pill {
+      border: var(--border-medium);
+      background: var(--background);
+      padding: var(--space-xs) var(--space-md);
+      font-family: var(--font-label);
+      font-weight: 700;
+      font-size: var(--body-size);
+      font-variant-numeric: tabular-nums;
+      display: inline-flex;
+      align-items: center;
+      gap: var(--space-xs);
+    }
+    .hud-pill--alert {
+      background: var(--error);
+      color: var(--on-error);
+    }
+
+    /* Question Stepper Strip */
+    .q-strip {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--space-sm);
+      align-items: center;
+    }
+    .q-tier-group {
+      display: flex;
+      align-items: center;
+      gap: var(--space-xs);
+      padding: var(--space-xs) var(--space-sm);
+      border: var(--border-medium);
+      background: var(--surface-container);
+    }
+    .q-tier-label {
+      font-family: var(--font-label);
+      font-weight: 700;
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin-right: var(--space-xs);
+    }
+    .q-num-btn {
+      min-width: 44px;
+      min-height: 44px;
+      border: var(--border-medium);
+      border-radius: var(--rounded);
+      background: var(--background);
+      color: var(--on-surface);
+      font-family: var(--font-label);
+      font-weight: 700;
+      font-size: var(--label-size);
+      cursor: pointer;
+      transition: background-color var(--dur-micro) var(--ease-out),
+                  transform var(--dur-micro) var(--ease-out);
+    }
+    .q-num-btn:hover {
+      background: var(--surface-container-high);
+    }
+    .q-num-btn.is-answered {
+      background: var(--primary);
+      color: var(--on-primary);
+    }
+    .q-num-btn.is-current {
+      background: var(--primary-container);
+      color: var(--on-primary-container);
+      box-shadow: var(--offset-shadow-sm);
+      transform: translate(-2px, -2px);
+    }
+
+    /* Question Stage — Asymmetric 2-col */
+    .question-stage {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(0, 1.35fr);
+      gap: var(--space-lg);
+      align-items: stretch;
+    }
+    .diagram-panel {
+      display: grid;
+      gap: var(--space-md);
+      align-content: start;
+      background: var(--background);
+    }
+    .svg-frame {
+      border: var(--border-medium);
+      background: var(--surface-container-low);
+      padding: var(--space-md);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 260px;
+    }
+    .svg-frame svg {
+      width: 100%;
+      height: auto;
+      max-height: 310px;
+      display: block;
+    }
+    .known-box {
+      border-top: var(--border-thick);
+      padding-top: var(--space-sm);
+      display: grid;
+      gap: var(--space-xs);
+    }
+    .known-list {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--space-sm);
+    }
+    .known-item {
+      border: var(--border-medium);
+      background: var(--surface-container);
+      padding: var(--space-xs) var(--space-sm);
+      font-weight: 600;
+      font-size: var(--body-size);
+    }
+
+    .question-panel {
+      display: grid;
+      gap: var(--space-lg);
+      align-content: space-between;
+    }
+    .q-meta {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: var(--space-sm);
+      border-bottom: var(--border-thick);
+      padding-bottom: var(--space-sm);
+    }
+    .q-number-title {
+      font-family: var(--font-headline);
+      font-weight: 700;
+      font-size: var(--subhead-size);
+      letter-spacing: -0.02em;
+    }
+    .q-text {
+      margin: 0;
+      font-family: var(--font-headline);
+      font-weight: 700;
+      font-size: var(--headline-size);
+      line-height: 1.3;
+      letter-spacing: -0.015em;
+      color: var(--on-surface);
+    }
+
+    .options-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: var(--space-md);
+    }
+    .option-btn {
+      display: flex;
+      align-items: center;
+      gap: var(--space-md);
+      min-height: 72px;
+      padding: var(--space-md) var(--space-lg);
+      border: var(--border-thick);
+      border-radius: var(--rounded);
+      box-shadow: var(--offset-shadow-sm);
+      background: var(--background);
+      color: var(--on-surface);
+      text-align: left;
+      font-weight: 600;
+      font-size: var(--subhead-size);
+      cursor: pointer;
+      transition: transform var(--dur-micro) var(--ease-out),
+                  box-shadow var(--dur-micro) var(--ease-out),
+                  background-color var(--dur-micro) var(--ease-out);
+    }
+    .option-btn:hover {
+      background: var(--surface-container-high);
+      transform: translate(-2px, -2px);
+      box-shadow: var(--offset-shadow);
+    }
+    .option-btn.is-selected {
+      background: var(--primary-container);
+      color: var(--on-primary-container);
+      transform: translate(-2px, -2px);
+      box-shadow: var(--offset-shadow);
+    }
+    .option-letter {
+      flex-shrink: 0;
+      width: 42px;
+      height: 42px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border: var(--border-medium);
+      background: var(--primary);
+      color: var(--on-primary);
+      font-family: var(--font-headline);
+      font-weight: 700;
+      font-size: var(--subhead-size);
+    }
+    .option-btn.is-selected .option-letter {
+      background: var(--tertiary);
+      color: var(--on-primary);
+    }
+    .option-body {
+      flex: 1;
+      line-height: 1.3;
+    }
+
+    .arena-footer {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      gap: var(--space-md);
+      border-top: var(--border-thick);
+      padding-top: var(--space-md);
+    }
+    .submit-zone {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: var(--space-sm);
+    }
+
+    /* Results Screen */
+    .results-grid {
+      display: grid;
+      gap: var(--space-xl);
+    }
+    .figures-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(min(240px, 100%), 1fr));
+      gap: var(--space-lg);
+    }
+    .figure-card {
+      border: var(--border-thick);
+      border-radius: var(--rounded);
+      box-shadow: var(--offset-shadow);
+      background: var(--background);
+      padding: var(--space-lg);
+      display: grid;
+      gap: var(--space-xs);
+    }
+    .figure-card--highlight {
+      background: var(--primary-container);
+      color: var(--on-primary-container);
+    }
+    .figure-card--danger {
+      border-color: var(--error);
+      background: var(--error-bg);
+    }
+    .figure-value {
+      font-family: var(--font-headline);
+      font-weight: 700;
+      font-size: clamp(2.1rem, 1.5rem + 2vw, 3.25rem);
+      line-height: 1.05;
+      letter-spacing: -0.03em;
+      font-variant-numeric: tabular-nums;
+    }
+    .figure-caption {
+      font-size: 0.95rem;
+      color: var(--on-surface-variant);
+      font-weight: 500;
+    }
+
+    .progress-bar-wrap {
+      border: var(--border-thick);
+      background: var(--background);
+      height: 28px;
+      width: 100%;
+      overflow: hidden;
+    }
+    .progress-bar-fill {
+      height: 100%;
+      background: var(--tertiary);
+      transition: width var(--dur-long) var(--ease-out);
+    }
+
+    /* Violation Log Table */
+    .log-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-variant-numeric: tabular-nums;
+    }
+    .log-table th {
+      text-align: left;
+      background: var(--surface-container-high);
+      border-bottom: var(--border-thick);
+      padding: var(--space-sm) var(--space-md);
+      font-family: var(--font-label);
+      font-weight: 700;
+      font-size: var(--label-size);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+    .log-table td {
+      border-bottom: 1px solid var(--outline-variant);
+      padding: var(--space-sm) var(--space-md);
+      font-weight: 500;
+    }
+
+    /* Teacher Gate */
+    .teacher-gate-form {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: flex-end;
+      gap: var(--space-md);
+    }
+    .teacher-gate-form .field-group {
+      flex: 1 1 280px;
+      max-width: 420px;
+    }
+
+    /* Teacher Unlocked Review */
+    .review-controls {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      gap: var(--space-md);
+      border-bottom: var(--border-thick);
+      padding-bottom: var(--space-md);
+    }
+    .filter-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--space-sm);
+    }
+    .review-list {
+      display: grid;
+      gap: var(--space-lg);
+    }
+    .review-card {
+      border: var(--border-thick);
+      background: var(--background);
+      padding: var(--space-lg);
+      display: grid;
+      gap: var(--space-md);
+      box-shadow: var(--offset-shadow-sm);
+    }
+    .review-card--correct {
+      border-left: var(--space-sm) solid var(--positive);
+    }
+    .review-card--wrong {
+      border-left: var(--space-sm) solid var(--error);
+    }
+    .review-answers {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(min(260px, 100%), 1fr));
+      gap: var(--space-md);
+    }
+    .answer-box {
+      border: var(--border-medium);
+      padding: var(--space-md);
+      background: var(--surface-container-low);
+    }
+    .answer-box--key {
+      background: var(--positive-bg);
+      border-color: var(--positive);
+    }
+    .answer-box--wrong {
+      background: var(--error-bg);
+      border-color: var(--error);
+    }
+    .explanation-box {
+      border-top: var(--border-medium);
+      padding-top: var(--space-md);
+      background: var(--surface-container-low);
+      padding: var(--space-md);
+    }
+
+    /* Anti-Cheat Warning Modal */
+    .modal-backdrop {
+      position: fixed;
+      inset: 0;
+      background: var(--backdrop);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: var(--space-lg);
+      z-index: 9999;
+    }
+    .modal-backdrop[hidden] { display: none; }
+    .modal-card {
+      max-width: 640px;
+      width: 100%;
+      background: var(--background);
+      border: var(--rule-heavy);
+      box-shadow: var(--offset-shadow);
+      display: grid;
+      gap: 0;
+    }
+    .modal-head {
+      background: var(--error);
+      color: var(--on-error);
+      padding: var(--space-md) var(--space-lg);
+      border-bottom: var(--border-thick);
+      display: flex;
+      align-items: center;
+      gap: var(--space-sm);
+      font-family: var(--font-headline);
+      font-weight: 700;
+      font-size: var(--headline-size);
+    }
+    .modal-body {
+      padding: var(--space-xl);
+      display: grid;
+      gap: var(--space-md);
+    }
+
+    /* Section visibility */
+    .view-section[hidden] { display: none; }
+
+    /* Mobile / Narrow Responsive */
+    @media (max-width: 900px) {
+      .register-grid,
+      .question-stage {
+        grid-template-columns: 1fr;
+      }
+      .options-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+    @media (max-width: 640px) {
+      .app-shell {
+        padding: var(--space-md);
+      }
+      .masthead {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+      .block {
+        padding: var(--space-md);
+      }
+      .arena-footer {
+        flex-direction: column;
+        align-items: stretch;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="app-shell">
+    <!-- MASTHEAD -->
+    <header class="masthead">
+      <div class="masthead-left">
+        <span class="kicker">Fisika Kelas XI SMA · Mode Kompetisi Beregu</span>
+        <h1 class="masthead-title">Kuis Beregu: <mark>Usaha &amp; Energi</mark></h1>
+        <p class="masthead-sub">15 Tantangan Bertingkat (Mudah, Sukar, HOTS) dengan Diagram Fisika &amp; Pengawas Anti-Curang</p>
+      </div>
+      <div class="masthead-controls">
+        <button type="button" class="btn btn--sm" id="btn-projector-size" onclick="toggleProjectorSize()">
+          <i data-lucide="zoom-in" width="18" height="18" aria-hidden="true"></i>
+          <span id="label-projector-size">Teks Ekstra Besar: Nonaktif</span>
+        </button>
+        <button type="button" class="btn btn--sm" id="btn-fullscreen" onclick="toggleFullscreen()">
+          <i data-lucide="maximize" width="18" height="18" aria-hidden="true"></i>
+          <span>Layar Penuh</span>
+        </button>
+      </div>
+    </header>
+
+    <!-- PHASE 1: REGISTRASI TIM -->
+    <section id="view-register" class="view-section">
+      <div class="register-grid">
+        <div class="block block--accent-blue">
+          <div style="display: grid; gap: var(--space-lg);">
+            <div>
+              <span class="kicker kicker--blue">Langkah 1 · Registrasi Kelompok</span>
+              <h2 style="margin: var(--space-sm) 0 0; font-family: var(--font-headline); font-size: var(--headline-size);">
+                Daftarkan Tim &amp; Anggota Kelompok
+              </h2>
+            </div>
+
+            <div class="field-group">
+              <label class="field-label" for="input-team-name">Nama Tim / Kelompok</label>
+              <span class="field-hint">Contoh: Tim Newton, Kelompok Joule, atau Regu XI-A1</span>
+              <input type="text" id="input-team-name" class="field-input" maxlength="60" oninput="handleTeamMetaChange()">
+            </div>
+
+            <div class="field-group">
+              <label class="field-label" for="input-team-class">Kelas / Rombel (Opsional)</label>
+              <span class="field-hint">Contoh: XI IPA 2</span>
+              <input type="text" id="input-team-class" class="field-input" maxlength="30" oninput="handleTeamMetaChange()">
+            </div>
+
+            <div class="field-group">
+              <div style="display: flex; justify-content: space-between; align-items: center; gap: var(--space-sm); flex-wrap: wrap;">
+                <span class="field-label">Daftar Anggota Kelompok</span>
+                <button type="button" class="btn btn--sm" onclick="addMemberSlot()">
+                  <i data-lucide="user-plus" width="16" height="16" aria-hidden="true"></i>
+                  <span>Tambah Anggota</span>
+                </button>
+              </div>
+              <div id="members-list" class="members-list"></div>
+            </div>
+
+            <div id="register-error" class="inline-alert" hidden>
+              <i data-lucide="alert-triangle" width="20" height="20" aria-hidden="true"></i>
+              <span id="register-error-text"></span>
+            </div>
+
+            <div>
+              <button type="button" class="btn btn--primary btn--lg" onclick="startGame()">
+                <span>Mulai Kuis Beregu (15 Soal)</span>
+                <i data-lucide="arrow-right" width="22" height="22" aria-hidden="true"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <aside style="display: grid; gap: var(--space-lg);">
+          <div class="block block--yellow">
+            <span class="kicker">Aturan Main &amp; Pengawasan</span>
+            <h3 style="margin: var(--space-sm) 0 var(--space-md); font-family: var(--font-headline); font-size: var(--subhead-size);">
+              Petunjuk Sebelum Bermain
+            </h3>
+            <ul class="rules-list">
+              <li><strong>15 Soal Komprehensif:</strong> Terdiri dari 5 soal <em>Mudah</em> (No. 1–5), 5 soal <em>Sukar</em> (No. 6–10), dan 5 soal <em>HOTS</em> (No. 11–15).</li>
+              <li><strong>Deteksi Anti-Curang Otomatis:</strong> Selama kuis berlangsung, berpindah tab atau meninggalkan jendela browser akan memicu peringatan tegas dan mencatat pelanggaran secara otomatis.</li>
+              <li><strong>Kerahasiaan Kunci Terjamin:</strong> Kunci jawaban dan pembahasan disembunyikan dari peserta didik, baik saat mengerjakan maupun setelah selesai. Hanya Guru/Operator yang dapat membukanya.</li>
+            </ul>
+          </div>
+
+          <div class="block block--paper block--accent-red">
+            <span class="kicker">Cakupan 8 Materi Fisika</span>
+            <p style="margin: var(--space-sm) 0 var(--space-md); font-weight: 500;">
+              Setiap soal dilengkapi diagram vektor/mekanika khusus untuk proyektor kelas:
+            </p>
+            <div class="topic-chips">
+              <span class="tag tag--blue">Usaha</span>
+              <span class="tag tag--yellow">Usaha pada Pegas</span>
+              <span class="tag">Energi Kinetik</span>
+              <span class="tag tag--blue">Energi Potensial</span>
+              <span class="tag tag--black">Energi Mekanik</span>
+              <span class="tag tag--yellow">Energi Kinetik Pegas</span>
+              <span class="tag">Daya</span>
+              <span class="tag tag--black">Efisiensi Daya</span>
+            </div>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <!-- PHASE 2: ARENA KUIS BEREGU -->
+    <section id="view-arena" class="view-section arena-stack" hidden>
+      <!-- Status Bar -->
+      <div class="status-bar">
+        <div class="status-team">
+          <div class="status-team-name" id="hud-team-name">Tim</div>
+          <div class="status-team-members" id="hud-team-members">Anggota: —</div>
+        </div>
+        <div class="status-metrics">
+          <span class="hud-pill" id="hud-progress">Terjawab: 0 / 15</span>
+          <span class="hud-pill" id="hud-timer">
+            <i data-lucide="clock" width="18" height="18" aria-hidden="true"></i>
+            <span id="hud-timer-value">00:00</span>
+          </span>
+          <span class="hud-pill" id="hud-violations">
+            <i data-lucide="shield-alert" width="18" height="18" aria-hidden="true"></i>
+            <span id="hud-violations-value">Pelanggaran: 0</span>
+          </span>
+        </div>
+      </div>
+
+      <!-- Question Stepper Strip -->
+      <div class="q-strip" id="q-stepper" aria-label="Navigasi Nomor Soal"></div>
+
+      <!-- Main Question Stage -->
+      <div class="question-stage">
+        <!-- Diagram Column -->
+        <div class="block diagram-panel">
+          <div style="display: flex; justify-content: space-between; align-items: center; gap: var(--space-sm);">
+            <span class="kicker kicker--blue" id="q-diagram-label">Visualisasi Kasus</span>
+            <span class="tag" id="q-topic-tag">Usaha</span>
+          </div>
+          <div class="svg-frame" id="q-svg-container" aria-label="Diagram Fisika Soal"></div>
+          <div class="known-box">
+            <span class="field-label">Data Diketahui pada Soal</span>
+            <ul class="known-list" id="q-known-list"></ul>
+          </div>
+        </div>
+
+        <!-- Question & Options Column -->
+        <div class="block block--paper question-panel">
+          <div style="display: grid; gap: var(--space-lg);">
+            <div class="q-meta">
+              <span class="q-number-title" id="q-number-heading">SOAL 01 / 15</span>
+              <span class="tag" id="q-difficulty-badge">MUDAH</span>
+            </div>
+
+            <p class="q-text" id="q-text-body"></p>
+
+            <div class="options-grid" id="q-options-grid"></div>
+          </div>
+
+          <div class="arena-footer">
+            <div style="display: flex; gap: var(--space-sm); flex-wrap: wrap;">
+              <button type="button" class="btn" id="btn-prev-q" onclick="prevQuestion()">
+                <i data-lucide="arrow-left" width="18" height="18" aria-hidden="true"></i>
+                <span>Sebelumnya</span>
+              </button>
+              <button type="button" class="btn btn--blue" id="btn-next-q" onclick="nextQuestion()">
+                <span>Berikutnya</span>
+                <i data-lucide="arrow-right" width="18" height="18" aria-hidden="true"></i>
+              </button>
+            </div>
+
+            <div class="submit-zone">
+              <span id="submit-hint" style="font-weight: 700; color: var(--error);" hidden></span>
+              <button type="button" class="btn btn--primary btn--lg" id="btn-finish-quiz" onclick="handleFinishClick(this)">
+                <i data-lucide="check-square" width="20" height="20" aria-hidden="true"></i>
+                <span id="label-finish-btn">Kumpulkan Jawaban Tim</span>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PHASE 3: HASIL & KUNCI GURU -->
+    <section id="view-results" class="view-section results-grid" hidden>
+      <!-- Team & Summary Figures -->
+      <div class="block block--accent-yellow">
+        <div style="display: grid; gap: var(--space-lg);">
+          <div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: flex-start; gap: var(--space-md);">
+            <div>
+              <span class="kicker kicker--yellow">Laporan Akhir Permainan</span>
+              <h2 id="res-team-title" style="margin: var(--space-sm) 0 var(--space-xs); font-family: var(--font-headline); font-size: var(--headline-size);">
+                Tim
+              </h2>
+              <p id="res-team-members" style="margin: 0; font-weight: 600; color: var(--on-surface-variant);"></p>
+            </div>
+            <div id="res-integrity-badge"></div>
+          </div>
+
+          <div class="figures-grid">
+            <div class="figure-card figure-card--highlight">
+              <span class="field-label">Skor Akhir</span>
+              <div class="figure-value" id="res-score-raw">0 / 15</div>
+              <div class="figure-caption" id="res-score-scale">Nilai Skala 100: 0,0</div>
+            </div>
+
+            <div class="figure-card">
+              <span class="field-label">Persentase Nilai</span>
+              <div class="figure-value" id="res-percent">0%</div>
+              <div class="progress-bar-wrap" aria-hidden="true">
+                <div class="progress-bar-fill" id="res-percent-bar" style="width: 0%;"></div>
+              </div>
+            </div>
+
+            <div class="figure-card">
+              <span class="field-label">Waktu Pengerjaan</span>
+              <div class="figure-value" id="res-duration">00:00</div>
+              <div class="figure-caption" id="res-duration-caption">Total durasi kuis tim</div>
+            </div>
+
+            <div class="figure-card" id="res-violation-card">
+              <span class="field-label">Catatan Pelanggaran</span>
+              <div class="figure-value" id="res-violations">0</div>
+              <div class="figure-caption" id="res-violations-caption">Perpindahan tab / layar terdeteksi</div>
+            </div>
+          </div>
+
+          <!-- Violation Log Table (shown if violations > 0) -->
+          <div id="res-violation-log-wrap" hidden>
+            <h3 style="margin: 0 0 var(--space-sm); font-family: var(--font-headline); font-size: var(--subhead-size);">
+              Rincian Log Pelanggaran Anti-Curang
+            </h3>
+            <div style="overflow-x: auto; border: var(--border-medium); background: var(--background);">
+              <table class="log-table">
+                <thead>
+                  <tr>
+                    <th>No.</th>
+                    <th>Waktu Kejadian</th>
+                    <th>Posisi Soal</th>
+                    <th>Jenis Pelanggaran</th>
+                  </tr>
+                </thead>
+                <tbody id="res-violation-log-body"></tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Teacher Access Gate (Hidden Keys Until Unlocked) -->
+      <div class="block block--paper block--accent-red" id="teacher-gate-block">
+        <div style="display: grid; gap: var(--space-md);">
+          <div style="display: flex; align-items: center; gap: var(--space-sm);">
+            <span class="kicker">Area Khusus Guru / Operator</span>
+          </div>
+          <h3 style="margin: 0; font-family: var(--font-headline); font-size: var(--headline-size);">
+            Kunci Jawaban &amp; Pembahasan Terkunci
+          </h3>
+          <p style="margin: 0; max-width: 72ch; color: var(--on-surface-variant);">
+            Demi menjaga kerahasiaan soal, kunci jawaban benar maupun uraian pembahasan disembunyikan sepenuhnya dari peserta didik. Masukkan kode akses guru/operator untuk membuka kunci jawaban dan pembahasan lengkap 15 soal.
+          </p>
+
+          <div class="teacher-gate-form">
+            <div class="field-group">
+              <label class="field-label" for="input-teacher-code">Kode Akses Guru / Operator</label>
+              <input type="password" id="input-teacher-code" class="field-input" autocomplete="off" onkeydown="handleTeacherKeydown(event)">
+            </div>
+            <button type="button" class="btn" id="btn-toggle-code-vis" onclick="toggleTeacherCodeVisibility()">
+              <i data-lucide="eye" width="18" height="18" aria-hidden="true"></i>
+              <span>Tampilkan</span>
+            </button>
+            <button type="button" class="btn btn--primary btn--lg" onclick="unlockTeacherPanel()">
+              <i data-lucide="lock-open" width="20" height="20" aria-hidden="true"></i>
+              <span>Buka Kunci &amp; Pembahasan</span>
+            </button>
+          </div>
+
+          <div id="teacher-gate-error" class="inline-alert" hidden>
+            <i data-lucide="x-circle" width="20" height="20" aria-hidden="true"></i>
+            <span id="teacher-gate-error-text"></span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Unlocked Teacher Review Panel (Empty & Hidden until USAHA verified) -->
+      <div class="block block--accent-blue" id="teacher-panel-block" hidden>
+        <div style="display: grid; gap: var(--space-lg);">
+          <div class="review-controls">
+            <div>
+              <span class="kicker kicker--blue">Akses Guru Terverifikasi</span>
+              <h3 style="margin: var(--space-sm) 0 0; font-family: var(--font-headline); font-size: var(--headline-size);">
+                Kunci Jawaban &amp; Uraian Pembahasan Lengkap
+              </h3>
+            </div>
+            <div style="display: flex; flex-wrap: wrap; gap: var(--space-sm);">
+              <button type="button" class="btn btn--blue" onclick="exportReportCSV()">
+                <i data-lucide="download" width="18" height="18" aria-hidden="true"></i>
+                <span>Ekspor Laporan (CSV)</span>
+              </button>
+              <button type="button" class="btn" onclick="lockTeacherPanel()">
+                <i data-lucide="lock" width="18" height="18" aria-hidden="true"></i>
+                <span>Kunci Kembali</span>
+              </button>
+            </div>
+          </div>
+
+          <div class="figures-grid" id="teacher-tier-summary"></div>
+
+          <div class="filter-row" id="teacher-filter-row"></div>
+
+          <div class="review-list" id="teacher-review-list"></div>
+        </div>
+      </div>
+
+      <!-- New Team / Reset Bar -->
+      <div style="display: flex; justify-content: flex-end; gap: var(--space-md); flex-wrap: wrap;">
+        <button type="button" class="btn btn--lg" id="btn-new-team" onclick="resetForNewTeam(this)">
+          <i data-lucide="rotate-ccw" width="20" height="20" aria-hidden="true"></i>
+          <span>Mulai Sesi Tim Baru</span>
+        </button>
+      </div>
+    </section>
+  </div>
+
+  <!-- ANTI-CHEATING WARNING MODAL -->
+  <div id="cheat-modal" class="modal-backdrop" role="alertdialog" aria-modal="true" aria-labelledby="cheat-modal-title" hidden>
+    <div class="modal-card">
+      <div class="modal-head">
+        <i data-lucide="alert-octagon" width="28" height="28" aria-hidden="true"></i>
+        <span id="cheat-modal-title">PERINGATAN PELANGGARAN!</span>
+      </div>
+      <div class="modal-body">
+        <p style="margin: 0; font-family: var(--font-headline); font-weight: 700; font-size: var(--subhead-size);">
+          Sistem mendeteksi tim Anda berpindah tab atau meninggalkan jendela kuis!
+        </p>
+        <p style="margin: 0;">
+          Selama kuis berlangsung, peserta didik dilarang membuka tab lain, mencari jawaban di luar layar kuis, atau meminimalkan jendela browser. Pelanggaran ini telah <strong>dicatat secara otomatis</strong> ke dalam laporan guru/operator.
+        </p>
+        <div class="block block--yellow" style="box-shadow: none; padding: var(--space-md);">
+          <div style="font-family: var(--font-label); font-weight: 700; text-transform: uppercase; font-size: var(--label-size);">
+            Total Pelanggaran Tercatat
+          </div>
+          <div id="cheat-modal-count" style="font-family: var(--font-headline); font-weight: 700; font-size: var(--headline-size);">
+            1 Pelanggaran
+          </div>
+        </div>
+        <div>
+          <button type="button" class="btn btn--primary btn--lg" onclick="dismissCheatModal()">
+            <span>Saya Mengerti — Kembali ke Kuis</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <api-shim></api-shim>
+
+  <script>
+    const TEACHER_ACCESS_CODE = `USAHA`;
+
+    const QUESTIONS = [
+      {
+        id: 1,
+        tier: `Mudah`,
+        topic: `Usaha`,
+        text: `Sebuah peti bermassa 10 kg berada di atas lantai datar licin, lalu didorong dengan gaya mendatar konstan $F = 20\\text{ N}$ hingga berpindah sejauh $s = 4\\text{ m}$ searah dengan gaya. Berapakah usaha yang dilakukan pada peti tersebut?`,
+        known: [`F = 20 N`, `s = 4 m`, `θ = 0° (searah)`],
+        options: [
+          { key: `A`, label: `$5\\text{ J}$` },
+          { key: `B`, label: `$24\\text{ J}$` },
+          { key: `C`, label: `$80\\text{ J}$` },
+          { key: `D`, label: `$160\\text{ J}$` }
+        ],
+        correct: `C`,
+        explanation: `Karena gaya searah dengan perpindahan ($\\theta = 0^\\circ$, sehingga $\\cos 0^\\circ = 1$), usaha dihitung dengan $W = F \\cdot s = 20\\text{ N} \\times 4\\text{ m} = 80\\text{ J}$.`,
+        diagramType: `push_flat`
+      },
+      {
+        id: 2,
+        tier: `Mudah`,
+        topic: `Usaha`,
+        text: `Seorang siswa menarik koper dengan gaya $F = 50\\text{ N}$ yang membentuk sudut $\\theta = 60^\\circ$ terhadap lantai mendatar ($\\cos 60^\\circ = 0{,}5$). Jika koper berpindah mendatar sejauh $s = 10\\text{ m}$, berapakah usaha yang dilakukan gaya tersebut?`,
+        known: [`F = 50 N`, `θ = 60° (cos 60° = 0,5)`, `s = 10 m`],
+        options: [
+          { key: `A`, label: `$125\\text{ J}$` },
+          { key: `B`, label: `$250\\text{ J}$` },
+          { key: `C`, label: `$433\\text{ J}$` },
+          { key: `D`, label: `$500\\text{ J}$` }
+        ],
+        correct: `B`,
+        explanation: `Komponen gaya yang searah perpindahan adalah $F\\cos 60^\\circ$. Maka $W = F \\cdot s \\cdot \\cos 60^\\circ = 50 \\times 10 \\times 0{,}5 = 250\\text{ J}$.`,
+        diagramType: `pull_angle`
+      },
+      {
+        id: 3,
+        tier: `Mudah`,
+        topic: `Energi Kinetik`,
+        text: `Sebuah mobil bermassa $m = 1.000\\text{ kg}$ melaju lurus di jalan tol dengan kelajuan konstan $v = 20\\text{ m/s}$. Berapakah besar energi kinetik mobil tersebut?`,
+        known: [`m = 1.000 kg`, `v = 20 m/s`],
+        options: [
+          { key: `A`, label: `$10.000\\text{ J}$` },
+          { key: `B`, label: `$20.000\\text{ J}$` },
+          { key: `C`, label: `$200.000\\text{ J}$` },
+          { key: `D`, label: `$400.000\\text{ J}$` }
+        ],
+        correct: `C`,
+        explanation: `Energi kinetik dirumuskan $E_K = \\frac{1}{2} m v^2 = \\frac{1}{2} \\times 1.000 \\times (20)^2 = 500 \\times 400 = 200.000\\text{ J}$.`,
+        diagramType: `car_speed`
+      },
+      {
+        id: 4,
+        tier: `Mudah`,
+        topic: `Energi Potensial`,
+        text: `Sebuah balok bermassa $m = 4\\text{ kg}$ berada di balkon pada ketinggian $h = 15\\text{ m}$ di atas permukaan tanah ($g = 10\\text{ m/s}^2$). Berapakah energi potensial gravitasi balok tersebut terhadap tanah?`,
+        known: [`m = 4 kg`, `h = 15 m`, `g = 10 m/s²`],
+        options: [
+          { key: `A`, label: `$60\\text{ J}$` },
+          { key: `B`, label: `$150\\text{ J}$` },
+          { key: `C`, label: `$300\\text{ J}$` },
+          { key: `D`, label: `$600\\text{ J}$` }
+        ],
+        correct: `D`,
+        explanation: `Energi potensial gravitasi adalah $E_P = m \\cdot g \\cdot h = 4\\text{ kg} \\times 10\\text{ m/s}^2 \\times 15\\text{ m} = 600\\text{ J}$.`,
+        diagramType: `height_block`
+      },
+      {
+        id: 5,
+        tier: `Mudah`,
+        topic: `Daya`,
+        text: `Sebuah mesin derek (crane) melakukan usaha sebesar $W = 60.000\\text{ J}$ untuk mengangkat material bangunan dalam selang waktu $t = 30\\text{ s}$. Berapakah daya keluaran mesin derek tersebut?`,
+        known: [`W = 60.000 J`, `t = 30 s`],
+        options: [
+          { key: `A`, label: `$2.000\\text{ W}$` },
+          { key: `B`, label: `$3.000\\text{ W}$` },
+          { key: `C`, label: `$18.000\\text{ W}$` },
+          { key: `D`, label: `$30.000\\text{ W}$` }
+        ],
+        correct: `A`,
+        explanation: `Daya merupakan laju usaha per satuan waktu: $P = \\frac{W}{t} = \\frac{60.000\\text{ J}}{30\\text{ s}} = 2.000\\text{ W}$.`,
+        diagramType: `crane`
+      },
+      {
+        id: 6,
+        tier: `Sukar`,
+        topic: `Usaha`,
+        text: `Seorang petugas membawa kotak bermassa $5\\text{ kg}$ dengan gaya angkat vertikal ke atas $F = 50\\text{ N}$ sambil berjalan mendatar sejauh $s = 12\\text{ m}$ dengan kelajuan konstan. Berapakah usaha yang dilakukan gaya angkat tangan petugas terhadap kotak selama berjalan mendatar?`,
+        known: [`F = 50 N (vertikal ke atas)`, `s = 12 m (mendatar)`, `θ = 90°`],
+        options: [
+          { key: `A`, label: `$0\\text{ J}$` },
+          { key: `B`, label: `$250\\text{ J}$` },
+          { key: `C`, label: `$500\\text{ J}$` },
+          { key: `D`, label: `$600\\text{ J}$` }
+        ],
+        correct: `A`,
+        explanation: `Arah gaya angkat vertikal ke atas tegak lurus terhadap arah perpindahan mendatar ($\\theta = 90^\\circ$). Karena $\\cos 90^\\circ = 0$, maka $W = F \\cdot s \\cdot \\cos 90^\\circ = 50 \\times 12 \\times 0 = 0\\text{ J}$.`,
+        diagramType: `carry_perp`
+      },
+      {
+        id: 7,
+        tier: `Sukar`,
+        topic: `Energi Kinetik`,
+        text: `Sebuah benda bermassa $m = 2\\text{ kg}$ bergerak di lintasan datar licin dengan kelajuan awal $v_1 = 4\\text{ m/s}$. Setelah didorong gaya searah geraknya, kelajuannya bertambah menjadi $v_2 = 10\\text{ m/s}$. Berapakah usaha total yang dilakukan pada benda tersebut?`,
+        known: [`m = 2 kg`, `v₁ = 4 m/s`, `v₂ = 10 m/s`],
+        options: [
+          { key: `A`, label: `$12\\text{ J}$` },
+          { key: `B`, label: `$36\\text{ J}$` },
+          { key: `C`, label: `$84\\text{ J}$` },
+          { key: `D`, label: `$116\\text{ J}$` }
+        ],
+        correct: `C`,
+        explanation: `Menggunakan Teorema Usaha–Energi Kinetik: $W = \\Delta E_K = \\frac{1}{2}m(v_2^2 - v_1^2) = \\frac{1}{2}(2)(10^2 - 4^2) = 1 \\times (100 - 16) = 84\\text{ J}$.`,
+        diagramType: `delta_ek`
+      },
+      {
+        id: 8,
+        tier: `Sukar`,
+        topic: `Usaha pada Pegas`,
+        text: `Untuk meregangkan sebuah pegas sejauh $\\Delta x = 0{,}1\\text{ m}$ dari panjang setimbangnya, diperlukan gaya maksimum sebesar $F = 40\\text{ N}$ (memenuhi Hukum Hooke $F = k\\Delta x$). Berapakah usaha yang dilakukan untuk meregangkan pegas tersebut?`,
+        known: [`F = 40 N`, `Δx = 0,1 m`],
+        options: [
+          { key: `A`, label: `$2\\text{ J}$` },
+          { key: `B`, label: `$4\\text{ J}$` },
+          { key: `C`, label: `$8\\text{ J}$` },
+          { key: `D`, label: `$40\\text{ J}$` }
+        ],
+        correct: `A`,
+        explanation: `Gaya pegas bertambah linear dari $0$ hingga $F$, sehingga usaha pegas setara dengan luas segitiga grafik $F$–$\\Delta x$: $W = \\frac{1}{2} F \\cdot \\Delta x = \\frac{1}{2} \\times 40 \\times 0{,}1 = 2\\text{ J}$.`,
+        diagramType: `spring_work`
+      },
+      {
+        id: 9,
+        tier: `Sukar`,
+        topic: `Energi Potensial`,
+        text: `Sebuah pegas berkonstanta $k = 500\\text{ N/m}$ ditekan sehingga memendek sejauh $\\Delta x = 0{,}06\\text{ m}$ ($6\\text{ cm}$) dari posisi normalnya. Berapakah energi potensial elastis pegas yang tersimpan?`,
+        known: [`k = 500 N/m`, `Δx = 0,06 m`],
+        options: [
+          { key: `A`, label: `$0{,}45\\text{ J}$` },
+          { key: `B`, label: `$0{,}90\\text{ J}$` },
+          { key: `C`, label: `$1{,}80\\text{ J}$` },
+          { key: `D`, label: `$15{,}0\\text{ J}$` }
+        ],
+        correct: `B`,
+        explanation: `Energi potensial pegas dihitung dengan $E_{P\\text{ pegas}} = \\frac{1}{2} k (\\Delta x)^2 = \\frac{1}{2} \\times 500 \\times (0{,}06)^2 = 250 \\times 0{,}0036 = 0{,}90\\text{ J}$.`,
+        diagramType: `spring_compress`
+      },
+      {
+        id: 10,
+        tier: `Sukar`,
+        topic: `Daya`,
+        text: `Sebuah mobil bergerak lurus di jalan datar dengan kelajuan tetap $v = 15\\text{ m/s}$. Jika gaya dorong mesin untuk melawan gaya gesek dan hambatan udara sebesar $F = 4.000\\text{ N}$, berapakah daya yang dihasilkan mesin mobil tersebut?`,
+        known: [`F = 4.000 N`, `v = 15 m/s`],
+        options: [
+          { key: `A`, label: `$15\\text{ kW}$` },
+          { key: `B`, label: `$30\\text{ kW}$` },
+          { key: `C`, label: `$45\\text{ kW}$` },
+          { key: `D`, label: `$60\\text{ kW}$` }
+        ],
+        correct: `D`,
+        explanation: `Hubungan daya dengan gaya dan kecepatan tetap adalah $P = F \\cdot v = 4.000\\text{ N} \\times 15\\text{ m/s} = 60.000\\text{ W} = 60\\text{ kW}$.`,
+        diagramType: `car_power`
+      },
+      {
+        id: 11,
+        tier: `HOTS`,
+        topic: `Energi Mekanik`,
+        text: `Sebuah benda dijatuhkan bebas ($v_1 = 0$) dari ketinggian $h_1 = 20\\text{ m}$ di atas tanah ($g = 10\\text{ m/s}^2$, gesekan udara diabaikan). Berapakah kelajuan benda tepat saat berada pada ketinggian $h_2 = 5\\text{ m}$ di atas tanah?`,
+        known: [`v₁ = 0 m/s`, `h₁ = 20 m`, `h₂ = 5 m`, `g = 10 m/s²`],
+        options: [
+          { key: `A`, label: `$10\\text{ m/s}$` },
+          { key: `B`, label: `$10\\sqrt{2}\\text{ m/s}$` },
+          { key: `C`, label: `$10\\sqrt{3}\\text{ m/s}$` },
+          { key: `D`, label: `$20\\text{ m/s}$` }
+        ],
+        correct: `C`,
+        explanation: `Dengan Hukum Kekekalan Energi Mekanik: $E_{M1} = E_{M2} \\implies mgh_1 + 0 = mgh_2 + \\frac{1}{2}mv_2^2$. Maka $v_2 = \\sqrt{2g(h_1 - h_2)} = \\sqrt{2 \\times 10 \\times (20 - 5)} = \\sqrt{300} = 10\\sqrt{3}\\text{ m/s}$.`,
+        diagramType: `free_fall`
+      },
+      {
+        id: 12,
+        tier: `HOTS`,
+        topic: `Energi Mekanik`,
+        text: `Sebuah bola dilempar vertikal ke atas dari tanah dengan kelajuan awal $v_0 = 20\\text{ m/s}$ ($g = 10\\text{ m/s}^2$, gesekan udara diabaikan). Pada ketinggian berapakah energi potensial gravitasi bola bernilai tepat tiga kali energi kinetiknya ($E_P = 3 E_K$)?`,
+        known: [`v₀ = 20 m/s`, `g = 10 m/s²`, `Syarat: E_P = 3 E_K`],
+        options: [
+          { key: `A`, label: `$5\\text{ m}$` },
+          { key: `B`, label: `$10\\text{ m}$` },
+          { key: `C`, label: `$12\\text{ m}$` },
+          { key: `D`, label: `$15\\text{ m}$` }
+        ],
+        correct: `D`,
+        explanation: `Ketinggian maksimumnya adalah $h_{\\max} = \\frac{v_0^2}{2g} = \\frac{400}{20} = 20\\text{ m}$, sehingga $E_M = mgh_{\\max}$. Saat $E_P = 3E_K$, maka $E_M = E_P + E_K = E_P + \\frac{1}{3}E_P = \\frac{4}{3}E_P$. Jadi $E_P = \\frac{3}{4}E_M \\implies mgh = \\frac{3}{4}mgh_{\\max} \\implies h = \\frac{3}{4} \\times 20\\text{ m} = 15\\text{ m}$.`,
+        diagramType: `vertical_throw`
+      },
+      {
+        id: 13,
+        tier: `HOTS`,
+        topic: `Energi Kinetik Pegas`,
+        text: `Sebuah balok bermassa $m = 2\\text{ kg}$ di lantai datar licin menempel pada pegas berkonstanta $k = 200\\text{ N/m}$ yang ditekan sejauh $\\Delta x = 0{,}2\\text{ m}$ lalu dilepaskan. Jika seluruh energi potensial pegas berubah menjadi energi kinetik saat melewati titik setimbang, berapakah energi kinetik pegas (balok) dan kelajuannya di titik setimbang?`,
+        known: [`m = 2 kg`, `k = 200 N/m`, `Δx = 0,2 m`, `Lantai licin`],
+        options: [
+          { key: `A`, label: `$E_K = 2\\text{ J},\\; v = 1\\text{ m/s}$` },
+          { key: `B`, label: `$E_K = 4\\text{ J},\\; v = 2\\text{ m/s}$` },
+          { key: `C`, label: `$E_K = 4\\text{ J},\\; v = 4\\text{ m/s}$` },
+          { key: `D`, label: `$E_K = 8\\text{ J},\\; v = 2\\sqrt{2}\\text{ m/s}$` }
+        ],
+        correct: `B`,
+        explanation: `Saat pegas kembali ke titik setimbang ($\\Delta x = 0$), seluruh energi potensial pegas terkonversi menjadi energi kinetik: $E_{K} = \\frac{1}{2}k(\\Delta x)^2 = \\frac{1}{2} \\times 200 \\times (0{,}2)^2 = 4\\text{ J}$. Lalu $\\frac{1}{2}mv^2 = 4 \\implies \\frac{1}{2}(2)v^2 = 4 \\implies v = 2\\text{ m/s}$.`,
+        diagramType: `spring_kinetic`
+      },
+      {
+        id: 14,
+        tier: `HOTS`,
+        topic: `Efisiensi Daya`,
+        text: `Sebuah motor listrik menerima daya masukan $P_{\\text{in}} = 800\\text{ W}$ dengan efisiensi $\\eta = 75\\%$ ($P_{\\text{out}} = 600\\text{ W}$). Jika motor tersebut digunakan untuk mengangkat beban bermassa $m = 5\\text{ kg}$ setinggi $\\Delta h = 6\\text{ m}$ ($g = 10\\text{ m/s}^2$), berapakah waktu minimum yang diperlukan?`,
+        known: [`P_in = 800 W`, `η = 75%`, `m = 5 kg`, `Δh = 6 m`, `g = 10 m/s²`],
+        options: [
+          { key: `A`, label: `$0{,}38\\text{ s}$` },
+          { key: `B`, label: `$0{,}50\\text{ s}$` },
+          { key: `C`, label: `$0{,}75\\text{ s}$` },
+          { key: `D`, label: `$1{,}25\\text{ s}$` }
+        ],
+        correct: `B`,
+        explanation: `Daya keluaran berguna motor: $P_{\\text{out}} = 75\\% \\times 800\\text{ W} = 600\\text{ W}$. Usaha angkat beban: $W = mg\\Delta h = 5 \\times 10 \\times 6 = 300\\text{ J}$. Waktu minimum yang dibutuhkan: $t = \\frac{W}{P_{\\text{out}}} = \\frac{300\\text{ J}}{600\\text{ W}} = 0{,}50\\text{ s}$.`,
+        diagramType: `motor_lift`
+      },
+      {
+        id: 15,
+        tier: `HOTS`,
+        topic: `Efisiensi Daya`,
+        text: `Sebuah pompa air menaikkan air bermassa $m = 100\\text{ kg}$ ke tangki setinggi $h = 6\\text{ m}$ dalam waktu $t = 10\\text{ s}$ ($g = 10\\text{ m/s}^2$). Jika efisiensi pompa air tersebut $\\eta = 80\\%$, berapakah daya listrik masukan ($P_{\\text{in}}$) yang diperlukan pompa?`,
+        known: [`m = 100 kg`, `h = 6 m`, `t = 10 s`, `η = 80%`, `g = 10 m/s²`],
+        options: [
+          { key: `A`, label: `$480\\text{ W}$` },
+          { key: `B`, label: `$600\\text{ W}$` },
+          { key: `C`, label: `$720\\text{ W}$` },
+          { key: `D`, label: `$750\\text{ W}$` }
+        ],
+        correct: `D`,
+        explanation: `Usaha mengangkat air: $W = mgh = 100 \\times 10 \\times 6 = 6.000\\text{ J}$. Daya keluaran berguna: $P_{\\text{out}} = \\frac{W}{t} = \\frac{6.000}{10} = 600\\text{ W}$. Dari $\\eta = \\frac{P_{\\text{out}}}{P_{\\text{in}}} \\times 100\\%$, didapat $P_{\\text{in}} = \\frac{600}{0{,}80} = 750\\text{ W}$.`,
+        diagramType: `water_pump`
+      }
+    ];
+
+    function defaultState() {
+      return {
+        phase: `register`,
+        teamName: ``,
+        teamClass: ``,
+        members: [``, ``, ``],
+        currentIndex: 0,
+        answers: {},
+        elapsedSeconds: 0,
+        violations: 0,
+        violationLog: [],
+        projectorXL: false,
+        teacherUnlocked: false,
+        teacherFilter: `all`
+      };
+    }
+
+    let state = defaultState();
+    let timerInterval = null;
+    let lastViolationTimestamp = 0;
+    let cheatModalOpen = false;
+
+    function saveAppState() {
+      if (window.notebookAppApi && typeof window.notebookAppApi.setAppState === `function`) {
+        window.notebookAppApi.setAppState(state).catch(function() {});
+      }
+    }
+
+    function formatDuration(totalSec) {
+      const m = Math.floor(totalSec / 60);
+      const s = totalSec % 60;
+      return String(m).padStart(2, `0`) + `:` + String(s).padStart(2, `0`);
+    }
+
+    function formatDurationWords(totalSec) {
+      const m = Math.floor(totalSec / 60);
+      const s = totalSec % 60;
+      return `${m} mnt ${s} dtk`;
+    }
+
+    function renderKaTeXIn(el) {
+      if (!el) return;
+      if (typeof window.renderMathInElement === `function`) {
+        try {
+          window.renderMathInElement(el, {
+            delimiters: [
+              { left: `$$`, right: `$$`, display: true },
+              { left: `$`, right: `$`, display: false }
+            ],
+            throwOnError: false
+          });
+        } catch (e) {}
+      }
+    }
+
+    function refreshIcons() {
+      if (window.lucide && typeof window.lucide.createIcons === `function`) {
+        try {
+          window.lucide.createIcons();
+        } catch (e) {}
+      }
+    }
+
+    function buildPhysicsSVG(type) {
+      const baseDefs = `
+        <defs>
+          <marker id="arrow-blue" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+            <path d="M 0 1 L 10 5 L 0 9 z" fill="var(--tertiary)" />
+          </marker>
+          <marker id="arrow-red" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+            <path d="M 0 1 L 10 5 L 0 9 z" fill="var(--secondary)" />
+          </marker>
+          <marker id="arrow-ink" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+            <path d="M 0 1 L 10 5 L 0 9 z" fill="var(--outline)" />
+          </marker>
+        </defs>`;
+
+      const textStyle = `font-family="var(--font-headline)" font-weight="700" fill="var(--on-surface)"`;
+
+      switch (type) {
+        case `push_flat`:
+          return `<svg viewBox="0 0 420 220" role="img" aria-label="Diagram gaya mendatar mendorong peti">
+            ${baseDefs}
+            <line x1="25" y1="165" x2="395" y2="165" stroke="var(--outline)" stroke-width="4" />
+            <rect x="85" y="95" width="80" height="70" fill="var(--primary-container)" stroke="var(--outline)" stroke-width="3" />
+            <text x="125" y="136" text-anchor="middle" font-size="18" ${textStyle}>10 kg</text>
+            <rect x="275" y="95" width="80" height="70" fill="none" stroke="var(--outline)" stroke-width="3" stroke-dasharray="6 5" />
+            <line x1="25" y1="130" x2="80" y2="130" stroke="var(--tertiary)" stroke-width="4" marker-end="url(#arrow-blue)" />
+            <text x="46" y="116" text-anchor="middle" font-size="17" fill="var(--tertiary)" font-family="var(--font-headline)" font-weight="700">F = 20 N</text>
+            <line x1="125" y1="188" x2="315" y2="188" stroke="var(--outline)" stroke-width="3" marker-end="url(#arrow-ink)" />
+            <text x="220" y="210" text-anchor="middle" font-size="17" ${textStyle}>s = 4 m</text>
+          </svg>`;
+
+        case `pull_angle`:
+          return `<svg viewBox="0 0 420 220" role="img" aria-label="Diagram menarik koper membentuk sudut 60 derajat">
+            ${baseDefs}
+            <line x1="25" y1="168" x2="395" y2="168" stroke="var(--outline)" stroke-width="4" />
+            <rect x="70" y="103" width="85" height="65" fill="var(--primary-container)" stroke="var(--outline)" stroke-width="3" />
+            <text x="112" y="141" text-anchor="middle" font-size="16" ${textStyle}>KOPER</text>
+            <line x1="155" y1="120" x2="295" y2="120" stroke="var(--outline)" stroke-width="2" stroke-dasharray="5 5" />
+            <line x1="155" y1="120" x2="245" y2="42" stroke="var(--tertiary)" stroke-width="4" marker-end="url(#arrow-blue)" />
+            <path d="M 205 120 A 50 50 0 0 0 183 78" fill="none" stroke="var(--secondary)" stroke-width="3" />
+            <text x="225" y="106" font-size="16" ${textStyle}>θ = 60°</text>
+            <text x="255" y="48" font-size="17" fill="var(--tertiary)" font-family="var(--font-headline)" font-weight="700">F = 50 N</text>
+            <line x1="112" y1="190" x2="335" y2="190" stroke="var(--outline)" stroke-width="3" marker-end="url(#arrow-ink)" />
+            <text x="224" y="212" text-anchor="middle" font-size="17" ${textStyle}>s = 10 m</text>
+          </svg>`;
+
+        case `car_speed`:
+          return `<svg viewBox="0 0 420 220" role="img" aria-label="Diagram mobil melaju dengan kecepatan 20 meter per sekon">
+            ${baseDefs}
+            <line x1="25" y1="170" x2="395" y2="170" stroke="var(--outline)" stroke-width="4" />
+            <rect x="75" y="100" width="165" height="48" fill="var(--primary-container)" stroke="var(--outline)" stroke-width="3" />
+            <polygon points="105,100 130,65 200,65 220,100" fill="var(--background)" stroke="var(--outline)" stroke-width="3" />
+            <circle cx="115" cy="152" r="18" fill="var(--primary)" stroke="var(--outline)" stroke-width="3" />
+            <circle cx="205" cy="152" r="18" fill="var(--primary)" stroke="var(--outline)" stroke-width="3" />
+            <text x="158" y="130" text-anchor="middle" font-size="16" ${textStyle}>m = 1.000 kg</text>
+            <line x1="255" y1="115" x2="375" y2="115" stroke="var(--tertiary)" stroke-width="4" marker-end="url(#arrow-blue)" />
+            <text x="315" y="98" text-anchor="middle" font-size="18" fill="var(--tertiary)" font-family="var(--font-headline)" font-weight="700">v = 20 m/s</text>
+          </svg>`;
+
+        case `height_block`:
+          return `<svg viewBox="0 0 420 220" role="img" aria-label="Diagram balok pada ketinggian 15 meter">
+            ${baseDefs}
+            <line x1="25" y1="190" x2="395" y2="190" stroke="var(--outline)" stroke-width="4" />
+            <rect x="40" y="65" width="110" height="125" fill="var(--surface-container-high)" stroke="var(--outline)" stroke-width="3" />
+            <rect x="115" y="25" width="56" height="40" fill="var(--primary-container)" stroke="var(--outline)" stroke-width="3" />
+            <text x="143" y="51" text-anchor="middle" font-size="16" ${textStyle}>4 kg</text>
+            <line x1="230" y1="65" x2="230" y2="188" stroke="var(--tertiary)" stroke-width="3" marker-start="url(#arrow-blue)" marker-end="url(#arrow-blue)" />
+            <line x1="171" y1="65" x2="245" y2="65" stroke="var(--outline)" stroke-width="2" stroke-dasharray="4 4" />
+            <text x="295" y="132" text-anchor="middle" font-size="18" fill="var(--tertiary)" font-family="var(--font-headline)" font-weight="700">h = 15 m</text>
+            <text x="295" y="162" text-anchor="middle" font-size="15" ${textStyle}>g = 10 m/s²</text>
+          </svg>`;
+
+        case `crane`:
+          return `<svg viewBox="0 0 420 220" role="img" aria-label="Diagram mesin derek mengangkat beban">
+            ${baseDefs}
+            <line x1="25" y1="192" x2="395" y2="192" stroke="var(--outline)" stroke-width="4" />
+            <rect x="65" y="45" width="24" height="147" fill="var(--primary-container)" stroke="var(--outline)" stroke-width="3" />
+            <rect x="55" y="30" width="235" height="22" fill="var(--primary)" stroke="var(--outline)" stroke-width="3" />
+            <line x1="250" y1="52" x2="250" y2="115" stroke="var(--outline)" stroke-width="3" />
+            <rect x="215" y="115" width="70" height="45" fill="var(--tertiary)" stroke="var(--outline)" stroke-width="3" />
+            <text x="250" y="143" text-anchor="middle" font-size="15" fill="var(--on-primary)" font-family="var(--font-headline)" font-weight="700">BEBAN</text>
+            <line x1="315" y1="160" x2="315" y2="95" stroke="var(--secondary)" stroke-width="4" marker-end="url(#arrow-red)" />
+            <text x="348" y="118" font-size="16" ${textStyle}>W = 60 kJ</text>
+            <text x="348" y="142" font-size="16" ${textStyle}>t = 30 s</text>
+          </svg>`;
+
+        case `carry_perp`:
+          return `<svg viewBox="0 0 420 220" role="img" aria-label="Diagram gaya angkat tegak lurus arah perpindahan mendatar">
+            ${baseDefs}
+            <line x1="25" y1="175" x2="395" y2="175" stroke="var(--outline)" stroke-width="4" />
+            <rect x="95" y="95" width="76" height="54" fill="var(--primary-container)" stroke="var(--outline)" stroke-width="3" />
+            <text x="133" y="128" text-anchor="middle" font-size="16" ${textStyle}>5 kg</text>
+            <line x1="133" y1="95" x2="133" y2="30" stroke="var(--tertiary)" stroke-width="4" marker-end="url(#arrow-blue)" />
+            <text x="145" y="45" font-size="17" fill="var(--tertiary)" font-family="var(--font-headline)" font-weight="700">F = 50 N (↑)</text>
+            <line x1="171" y1="122" x2="335" y2="122" stroke="var(--outline)" stroke-width="4" marker-end="url(#arrow-ink)" />
+            <rect x="133" y="106" width="16" height="16" fill="none" stroke="var(--secondary)" stroke-width="3" />
+            <text x="258" y="108" text-anchor="middle" font-size="17" ${textStyle}>s = 12 m (→)</text>
+            <text x="258" y="150" text-anchor="middle" font-size="15" ${textStyle}>Sudut θ = 90°</text>
+          </svg>`;
+
+        case `delta_ek`:
+          return `<svg viewBox="0 0 420 220" role="img" aria-label="Diagram perubahan kelajuan dari 4 ke 10 meter per sekon">
+            ${baseDefs}
+            <line x1="25" y1="168" x2="395" y2="168" stroke="var(--outline)" stroke-width="4" />
+            <rect x="55" y="108" width="65" height="60" fill="var(--surface-container-high)" stroke="var(--outline)" stroke-width="3" />
+            <text x="87" y="144" text-anchor="middle" font-size="16" ${textStyle}>2 kg</text>
+            <line x1="87" y1="88" x2="147" y2="88" stroke="var(--tertiary)" stroke-width="4" marker-end="url(#arrow-blue)" />
+            <text x="115" y="72" text-anchor="middle" font-size="16" fill="var(--tertiary)" font-family="var(--font-headline)" font-weight="700">v₁ = 4 m/s</text>
+            <line x1="145" y1="138" x2="230" y2="138" stroke="var(--outline)" stroke-width="3" stroke-dasharray="5 5" marker-end="url(#arrow-ink)" />
+            <rect x="245" y="108" width="65" height="60" fill="var(--primary-container)" stroke="var(--outline)" stroke-width="3" />
+            <text x="277" y="144" text-anchor="middle" font-size="16" ${textStyle}>2 kg</text>
+            <line x1="277" y1="88" x2="385" y2="88" stroke="var(--secondary)" stroke-width="4" marker-end="url(#arrow-red)" />
+            <text x="330" y="72" text-anchor="middle" font-size="16" ${textStyle}>v₂ = 10 m/s</text>
+          </svg>`;
+
+        case `spring_work`:
+          return `<svg viewBox="0 0 420 220" role="img" aria-label="Diagram usaha pegas saat diregangkan">
+            ${baseDefs}
+            <rect x="30" y="50" width="22" height="120" fill="var(--primary)" />
+            <polyline points="52,110 78,110 92,80 112,140 132,80 152,140 172,80 192,140 206,110 232,110" fill="none" stroke="var(--outline)" stroke-width="4" stroke-linejoin="miter" />
+            <line x1="232" y1="110" x2="330" y2="110" stroke="var(--tertiary)" stroke-width="4" marker-end="url(#arrow-blue)" />
+            <text x="290" y="92" text-anchor="middle" font-size="17" fill="var(--tertiary)" font-family="var(--font-headline)" font-weight="700">F = 40 N</text>
+            <line x1="175" y1="170" x2="232" y2="170" stroke="var(--secondary)" stroke-width="4" marker-end="url(#arrow-red)" />
+            <line x1="175" y1="150" x2="175" y2="180" stroke="var(--outline)" stroke-width="2" />
+            <line x1="232" y1="150" x2="232" y2="180" stroke="var(--outline)" stroke-width="2" />
+            <text x="205" y="200" text-anchor="middle" font-size="17" ${textStyle}>Δx = 0,1 m</text>
+          </svg>`;
+
+        case `spring_compress`:
+          return `<svg viewBox="0 0 420 220" role="img" aria-label="Diagram pegas ditekan sejauh 0,06 meter">
+            ${baseDefs}
+            <line x1="30" y1="168" x2="390" y2="168" stroke="var(--outline)" stroke-width="4" />
+            <rect x="30" y="55" width="22" height="113" fill="var(--primary)" />
+            <polyline points="52,115 70,115 80,85 92,145 104,85 116,145 128,85 140,145 150,115 168,115" fill="none" stroke="var(--outline)" stroke-width="4" />
+            <rect x="168" y="82" width="58" height="86" fill="var(--primary-container)" stroke="var(--outline)" stroke-width="3" />
+            <line x1="295" y1="125" x2="230" y2="125" stroke="var(--tertiary)" stroke-width="4" marker-end="url(#arrow-blue)" />
+            <line x1="275" y1="65" x2="275" y2="168" stroke="var(--outline)" stroke-width="2" stroke-dasharray="5 5" />
+            <line x1="226" y1="186" x2="275" y2="186" stroke="var(--secondary)" stroke-width="3" />
+            <text x="250" y="208" text-anchor="middle" font-size="16" ${textStyle}>Δx = 0,06 m</text>
+            <text x="250" y="48" text-anchor="middle" font-size="17" fill="var(--tertiary)" font-family="var(--font-headline)" font-weight="700">k = 500 N/m</text>
+          </svg>`;
+
+        case `car_power`:
+          return `<svg viewBox="0 0 420 220" role="img" aria-label="Diagram daya dorong mobil pada kecepatan konstan">
+            ${baseDefs}
+            <line x1="25" y1="170" x2="395" y2="170" stroke="var(--outline)" stroke-width="4" />
+            <rect x="70" y="98" width="155" height="48" fill="var(--primary-container)" stroke="var(--outline)" stroke-width="3" />
+            <polygon points="95,98 120,66 185,66 205,98" fill="var(--background)" stroke="var(--outline)" stroke-width="3" />
+            <circle cx="110" cy="150" r="18" fill="var(--primary)" />
+            <circle cx="190" cy="150" r="18" fill="var(--primary)" />
+            <line x1="235" y1="108" x2="365" y2="108" stroke="var(--tertiary)" stroke-width="4" marker-end="url(#arrow-blue)" />
+            <text x="305" y="92" text-anchor="middle" font-size="16" fill="var(--tertiary)" font-family="var(--font-headline)" font-weight="700">F = 4.000 N</text>
+            <line x1="235" y1="138" x2="345" y2="138" stroke="var(--secondary)" stroke-width="4" marker-end="url(#arrow-red)" />
+            <text x="305" y="158" text-anchor="middle" font-size="16" ${textStyle}>v = 15 m/s</text>
+          </svg>`;
+
+        case `free_fall`:
+          return `<svg viewBox="0 0 420 220" role="img" aria-label="Diagram benda jatuh bebas dari 20 meter ke 5 meter">
+            ${baseDefs}
+            <line x1="25" y1="196" x2="395" y2="196" stroke="var(--outline)" stroke-width="4" />
+            <circle cx="145" cy="36" r="18" fill="var(--primary-container)" stroke="var(--outline)" stroke-width="3" />
+            <text x="175" y="42" font-size="16" ${textStyle}>v₁ = 0 (h₁ = 20 m)</text>
+            <line x1="145" y1="58" x2="145" y2="115" stroke="var(--tertiary)" stroke-width="3" stroke-dasharray="5 4" marker-end="url(#arrow-blue)" />
+            <circle cx="145" cy="138" r="18" fill="var(--tertiary)" stroke="var(--outline)" stroke-width="3" />
+            <text x="175" y="144" font-size="16" fill="var(--tertiary)" font-family="var(--font-headline)" font-weight="700">v₂ = ? (h₂ = 5 m)</text>
+            <line x1="75" y1="36" x2="75" y2="194" stroke="var(--outline)" stroke-width="3" />
+            <text x="48" y="118" text-anchor="middle" font-size="15" ${textStyle}>20 m</text>
+          </svg>`;
+
+        case `vertical_throw`:
+          return `<svg viewBox="0 0 420 220" role="img" aria-label="Diagram lemparan vertikal ke atas">
+            ${baseDefs}
+            <line x1="25" y1="192" x2="395" y2="192" stroke="var(--outline)" stroke-width="4" />
+            <circle cx="140" cy="172" r="16" fill="var(--primary-container)" stroke="var(--outline)" stroke-width="3" />
+            <line x1="140" y1="152" x2="140" y2="55" stroke="var(--tertiary)" stroke-width="4" marker-end="url(#arrow-blue)" />
+            <circle cx="140" cy="36" r="14" fill="none" stroke="var(--outline)" stroke-width="3" stroke-dasharray="4 4" />
+            <text x="175" y="42" font-size="15" ${textStyle}>Titik Puncak (v = 0)</text>
+            <text x="175" y="106" font-size="16" fill="var(--tertiary)" font-family="var(--font-headline)" font-weight="700">Syarat: E_P = 3 E_K</text>
+            <text x="175" y="176" font-size="16" ${textStyle}>v₀ = 20 m/s</text>
+          </svg>`;
+
+        case `spring_kinetic`:
+          return `<svg viewBox="0 0 420 220" role="img" aria-label="Diagram energi kinetik pegas melepaskan balok di titik setimbang">
+            ${baseDefs}
+            <line x1="25" y1="168" x2="395" y2="168" stroke="var(--outline)" stroke-width="4" />
+            <rect x="25" y="60" width="20" height="108" fill="var(--primary)" />
+            <polyline points="45,118 65,118 75,90 87,146 99,90 111,146 121,118 140,118" fill="none" stroke="var(--outline)" stroke-width="4" />
+            <rect x="140" y="92" width="56" height="76" fill="var(--surface-container-high)" stroke="var(--outline)" stroke-width="3" />
+            <line x1="230" y1="68" x2="230" y2="180" stroke="var(--secondary)" stroke-width="2" stroke-dasharray="5 5" />
+            <rect x="230" y="92" width="56" height="76" fill="var(--primary-container)" stroke="var(--outline)" stroke-width="3" />
+            <text x="258" y="136" text-anchor="middle" font-size="15" ${textStyle}>2 kg</text>
+            <line x1="295" y1="130" x2="375" y2="130" stroke="var(--tertiary)" stroke-width="4" marker-end="url(#arrow-blue)" />
+            <text x="335" y="112" text-anchor="middle" font-size="16" fill="var(--tertiary)" font-family="var(--font-headline)" font-weight="700">E_K = ?, v = ?</text>
+            <text x="185" y="198" text-anchor="middle" font-size="15" ${textStyle}>Δx = 0,2 m · k = 200 N/m</text>
+          </svg>`;
+
+        case `motor_lift`:
+          return `<svg viewBox="0 0 420 220" role="img" aria-label="Diagram motor pengerek dengan efisiensi 75 persen mengangkat beban">
+            ${baseDefs}
+            <rect x="35" y="55" width="120" height="80" fill="var(--primary-container)" stroke="var(--outline)" stroke-width="3" />
+            <text x="95" y="88" text-anchor="middle" font-size="15" ${textStyle}>MOTOR</text>
+            <text x="95" y="110" text-anchor="middle" font-size="15" ${textStyle}>η = 75%</text>
+            <text x="95" y="42" text-anchor="middle" font-size="16" ${textStyle}>P_in = 800 W</text>
+            <line x1="155" y1="95" x2="265" y2="95" stroke="var(--tertiary)" stroke-width="4" marker-end="url(#arrow-blue)" />
+            <text x="210" y="80" text-anchor="middle" font-size="15" fill="var(--tertiary)" font-family="var(--font-headline)" font-weight="700">P_out</text>
+            <rect x="275" y="120" width="66" height="52" fill="var(--tertiary)" stroke="var(--outline)" stroke-width="3" />
+            <text x="308" y="152" text-anchor="middle" font-size="16" fill="var(--on-primary)" font-family="var(--font-headline)" font-weight="700">5 kg</text>
+            <line x1="362" y1="172" x2="362" y2="92" stroke="var(--secondary)" stroke-width="3" marker-end="url(#arrow-red)" />
+            <text x="362" y="75" text-anchor="middle" font-size="15" ${textStyle}>Δh = 6 m</text>
+          </svg>`;
+
+        case `water_pump`:
+          return `<svg viewBox="0 0 420 220" role="img" aria-label="Diagram pompa air menaikkan air setinggi 6 meter dengan efisiensi 80 persen">
+            ${baseDefs}
+            <rect x="40" y="135" width="95" height="58" fill="var(--primary-container)" stroke="var(--outline)" stroke-width="3" />
+            <text x="87" y="160" text-anchor="middle" font-size="15" ${textStyle}>POMPA</text>
+            <text x="87" y="180" text-anchor="middle" font-size="15" ${textStyle}>η = 80%</text>
+            <polyline points="87,135 87,52 245,52" fill="none" stroke="var(--tertiary)" stroke-width="6" marker-end="url(#arrow-blue)" />
+            <rect x="255" y="25" width="110" height="75" fill="var(--surface-container-high)" stroke="var(--outline)" stroke-width="3" />
+            <rect x="258" y="55" width="104" height="42" fill="var(--tertiary)" />
+            <text x="310" y="45" text-anchor="middle" font-size="15" ${textStyle}>TANGKI 100 kg</text>
+            <line x1="210" y1="190" x2="210" y2="55" stroke="var(--outline)" stroke-width="3" marker-end="url(#arrow-ink)" />
+            <text x="172" y="122" text-anchor="middle" font-size="16" ${textStyle}>h = 6 m</text>
+            <text x="310" y="135" text-anchor="middle" font-size="16" ${textStyle}>t = 10 s</text>
+            <text x="310" y="162" text-anchor="middle" font-size="16" fill="var(--tertiary)" font-family="var(--font-headline)" font-weight="700">P_in = ?</text>
+          </svg>`;
+
+        default:
+          return ``;
+      }
+    }
+
+    function applyProjectorClass() {
+      if (state.projectorXL) {
+        document.body.classList.add(`projector-xl`);
+      } else {
+        document.body.classList.remove(`projector-xl`);
+      }
+      const lbl = document.getElementById(`label-projector-size`);
+      if (lbl) {
+        lbl.textContent = state.projectorXL ? `Teks Ekstra Besar: Aktif` : `Teks Ekstra Besar: Nonaktif`;
+      }
+    }
+
+    function toggleProjectorSize() {
+      state.projectorXL = !state.projectorXL;
+      applyProjectorClass();
+      saveAppState();
+    }
+
+    function toggleFullscreen() {
+      if (!document.fullscreenElement) {
+        if (document.documentElement.requestFullscreen) {
+          document.documentElement.requestFullscreen().catch(function() {});
+        }
+      } else {
+        if (document.exitFullscreen) {
+          document.exitFullscreen().catch(function() {});
+        }
+      }
+    }
+
+    function renderMembersInputs() {
+      const container = document.getElementById(`members-list`);
+      if (!container) return;
+      container.innerHTML = ``;
+
+      state.members.forEach(function(memberName, idx) {
+        const row = document.createElement(`div`);
+        row.className = `member-row`;
+
+        const fieldWrap = document.createElement(`div`);
+        fieldWrap.className = `field-group`;
+
+        const label = document.createElement(`label`);
+        label.className = `field-label`;
+        label.setAttribute(`for`, `member-input-${idx}`);
+        label.textContent = `Anggota ${idx + 1}`;
+
+        const input = document.createElement(`input`);
+        input.type = `text`;
+        input.id = `member-input-${idx}`;
+        input.className = `field-input`;
+        input.maxLength = 50;
+        input.value = memberName;
+        input.oninput = function() {
+          state.members[idx] = input.value;
+          saveAppState();
+        };
+
+        fieldWrap.appendChild(label);
+        fieldWrap.appendChild(input);
+        row.appendChild(fieldWrap);
+
+        if (state.members.length > 1) {
+          const rmBtn = document.createElement(`button`);
+          rmBtn.type = `button`;
+          rmBtn.className = `btn btn--sm`;
+          rmBtn.setAttribute(`aria-label`, `Hapus Anggota ${idx + 1}`);
+          rmBtn.innerHTML = `<i data-lucide="trash-2" width="18" height="18" aria-hidden="true"></i>`;
+          rmBtn.onclick = function() {
+            removeMemberSlot(idx);
+          };
+          row.appendChild(rmBtn);
+        }
+
+        container.appendChild(row);
+      });
+
+      refreshIcons();
+    }
+
+    function handleTeamMetaChange() {
+      const nameEl = document.getElementById(`input-team-name`);
+      const clsEl = document.getElementById(`input-team-class`);
+      if (nameEl) state.teamName = nameEl.value;
+      if (clsEl) state.teamClass = clsEl.value;
+      saveAppState();
+    }
+
+    function addMemberSlot() {
+      if (state.members.length >= 8) {
+        showRegisterError(`Maksimal 8 anggota per kelompok.`);
+        return;
+      }
+      hideRegisterError();
+      state.members.push(``);
+      renderMembersInputs();
+      saveAppState();
+    }
+
+    function removeMemberSlot(idx) {
+      if (state.members.length <= 1) return;
+      state.members.splice(idx, 1);
+      renderMembersInputs();
+      saveAppState();
+    }
+
+    function showRegisterError(msg) {
+      const box = document.getElementById(`register-error`);
+      const txt = document.getElementById(`register-error-text`);
+      if (txt) txt.textContent = msg;
+      if (box) box.hidden = false;
+    }
+
+    function hideRegisterError() {
+      const box = document.getElementById(`register-error`);
+      if (box) box.hidden = true;
+    }
+
+    function startGame() {
+      const nameEl = document.getElementById(`input-team-name`);
+      const clsEl = document.getElementById(`input-team-class`);
+      if (nameEl) state.teamName = nameEl.value.trim();
+      if (clsEl) state.teamClass = clsEl.value.trim();
+
+      const validMembers = state.members
+        .map(function(m) { return m.trim(); })
+        .filter(function(m) { return m.length > 0; });
+
+      if (!state.teamName) {
+        showRegisterError(`Mohon isi Nama Tim / Kelompok terlebih dahulu sebelum memulai kuis.`);
+        return;
+      }
+      if (validMembers.length === 0) {
+        showRegisterError(`Mohon isi minimal 1 nama anggota kelompok.`);
+        return;
+      }
+
+      hideRegisterError();
+      state.members = validMembers;
+      state.phase = `playing`;
+      state.currentIndex = 0;
+      state.answers = {};
+      state.elapsedSeconds = 0;
+      state.violations = 0;
+      state.violationLog = [];
+      state.teacherUnlocked = false;
+      saveAppState();
+      renderView();
+      startTimer();
+    }
+
+    function startTimer() {
+      stopTimer();
+      if (state.phase !== `playing`) return;
+      timerInterval = setInterval(function() {
+        if (state.phase !== `playing`) {
+          stopTimer();
+          return;
+        }
+        state.elapsedSeconds += 1;
+        const timerVal = document.getElementById(`hud-timer-value`);
+        if (timerVal) timerVal.textContent = formatDuration(state.elapsedSeconds);
+        if (state.elapsedSeconds % 5 === 0) {
+          saveAppState();
+        }
+      }, 1000);
+    }
+
+    function stopTimer() {
+      if (timerInterval) {
+        clearInterval(timerInterval);
+        timerInterval = null;
+      }
+    }
+
+    function recordCheatViolation(reasonText) {
+      if (state.phase !== `playing`) return;
+      const now = Date.now();
+      if (now - lastViolationTimestamp < 1200) return;
+      lastViolationTimestamp = now;
+
+      state.violations += 1;
+      const d = new Date();
+      const timeStr = d.toLocaleTimeString(`id-ID`, { hour: `2-digit`, minute: `2-digit`, second: `2-digit` });
+
+      state.violationLog.push({
+        no: state.violations,
+        time: timeStr,
+        questionNo: state.currentIndex + 1,
+        reason: reasonText
+      });
+
+      saveAppState();
+      updateViolationsHUD();
+
+      const modal = document.getElementById(`cheat-modal`);
+      const countEl = document.getElementById(`cheat-modal-count`);
+      if (countEl) {
+        countEl.textContent = `${state.violations} Pelanggaran`;
+      }
+      if (modal) {
+        modal.hidden = false;
+        cheatModalOpen = true;
+      }
+    }
+
+    function dismissCheatModal() {
+      const modal = document.getElementById(`cheat-modal`);
+      if (modal) modal.hidden = true;
+      cheatModalOpen = false;
+    }
+
+    function updateViolationsHUD() {
+      const pill = document.getElementById(`hud-violations`);
+      const valEl = document.getElementById(`hud-violations-value`);
+      if (valEl) valEl.textContent = `Pelanggaran: ${state.violations}`;
+      if (pill) {
+        if (state.violations > 0) {
+          pill.classList.add(`hud-pill--alert`);
+        } else {
+          pill.classList.remove(`hud-pill--alert`);
+        }
+      }
+    }
+
+    function renderStepper() {
+      const strip = document.getElementById(`q-stepper`);
+      if (!strip) return;
+      strip.innerHTML = ``;
+
+      const tiers = [
+        { label: `Mudah`, start: 0, end: 4 },
+        { label: `Sukar`, start: 5, end: 9 },
+        { label: `HOTS`, start: 10, end: 14 }
+      ];
+
+      tiers.forEach(function(t) {
+        const grp = document.createElement(`div`);
+        grp.className = `q-tier-group`;
+
+        const lbl = document.createElement(`span`);
+        lbl.className = `q-tier-label`;
+        lbl.textContent = t.label;
+        grp.appendChild(lbl);
+
+        for (let i = t.start; i <= t.end; i++) {
+          const q = QUESTIONS[i];
+          const btn = document.createElement(`button`);
+          btn.type = `button`;
+          btn.className = `q-num-btn`;
+          if (state.answers[q.id]) btn.classList.add(`is-answered`);
+          if (i === state.currentIndex) btn.classList.add(`is-current`);
+          btn.textContent = String(q.id);
+          btn.setAttribute(`aria-label`, `Soal ${q.id} (${q.tier})`);
+          btn.onclick = function() {
+            goToQuestion(i);
+          };
+          grp.appendChild(btn);
+        }
+
+        strip.appendChild(grp);
+      });
+    }
+
+    function renderCurrentQuestion() {
+      const q = QUESTIONS[state.currentIndex];
+      if (!q) return;
+
+      const teamNameEl = document.getElementById(`hud-team-name`);
+      const teamMembersEl = document.getElementById(`hud-team-members`);
+      if (teamNameEl) {
+        teamNameEl.textContent = state.teamClass ? `${state.teamName} (${state.teamClass})` : state.teamName;
+      }
+      if (teamMembersEl) {
+        teamMembersEl.textContent = `Anggota: ${state.members.join(`, `)}`;
+      }
+
+      const answeredCount = Object.keys(state.answers).length;
+      const progEl = document.getElementById(`hud-progress`);
+      if (progEl) progEl.textContent = `Terjawab: ${answeredCount} / ${QUESTIONS.length}`;
+
+      const timerVal = document.getElementById(`hud-timer-value`);
+      if (timerVal) timerVal.textContent = formatDuration(state.elapsedSeconds);
+      updateViolationsHUD();
+
+      const topicTag = document.getElementById(`q-topic-tag`);
+      if (topicTag) topicTag.textContent = q.topic;
+
+      const svgContainer = document.getElementById(`q-svg-container`);
+      if (svgContainer) svgContainer.innerHTML = buildPhysicsSVG(q.diagramType);
+
+      const knownList = document.getElementById(`q-known-list`);
+      if (knownList) {
+        knownList.innerHTML = ``;
+        q.known.forEach(function(item) {
+          const li = document.createElement(`li`);
+          li.className = `known-item`;
+          li.textContent = item;
+          knownList.appendChild(li);
+        });
+      }
+
+      const numHead = document.getElementById(`q-number-heading`);
+      if (numHead) numHead.textContent = `SOAL ${String(q.id).padStart(2, `0`)} / ${QUESTIONS.length}`;
+
+      const diffBadge = document.getElementById(`q-difficulty-badge`);
+      if (diffBadge) {
+        diffBadge.textContent = q.tier.toUpperCase();
+        diffBadge.className = `tag`;
+        if (q.tier === `Mudah`) diffBadge.classList.add(`tag--blue`);
+        else if (q.tier === `Sukar`) diffBadge.classList.add(`tag--yellow`);
+        else diffBadge.classList.add(`tag--black`);
+      }
+
+      const qText = document.getElementById(`q-text-body`);
+      if (qText) {
+        qText.textContent = q.text;
+        renderKaTeXIn(qText);
+      }
+
+      const optionsGrid = document.getElementById(`q-options-grid`);
+      if (optionsGrid) {
+        optionsGrid.innerHTML = ``;
+        const selectedKey = state.answers[q.id] || ``;
+        q.options.forEach(function(opt) {
+          const btn = document.createElement(`button`);
+          btn.type = `button`;
+          btn.className = `option-btn`;
+          if (selectedKey === opt.key) btn.classList.add(`is-selected`);
+          btn.onclick = function() {
+            selectAnswer(q.id, opt.key);
+          };
+
+          const letterSpan = document.createElement(`span`);
+          letterSpan.className = `option-letter`;
+          letterSpan.textContent = opt.key;
+
+          const bodySpan = document.createElement(`span`);
+          bodySpan.className = `option-body`;
+          bodySpan.textContent = opt.label;
+
+          btn.appendChild(letterSpan);
+          btn.appendChild(bodySpan);
+          optionsGrid.appendChild(btn);
+        });
+        renderKaTeXIn(optionsGrid);
+      }
+
+      const prevBtn = document.getElementById(`btn-prev-q`);
+      const nextBtn = document.getElementById(`btn-next-q`);
+      if (prevBtn) prevBtn.disabled = state.currentIndex === 0;
+      if (nextBtn) nextBtn.disabled = state.currentIndex === QUESTIONS.length - 1;
+
+      resetFinishArming();
+      renderStepper();
+    }
+
+    function selectAnswer(questionId, optionKey) {
+      state.answers[questionId] = optionKey;
+      saveAppState();
+      renderCurrentQuestion();
+    }
+
+    function goToQuestion(idx) {
+      if (idx < 0 || idx >= QUESTIONS.length) return;
+      state.currentIndex = idx;
+      saveAppState();
+      renderCurrentQuestion();
+    }
+
+    function prevQuestion() {
+      goToQuestion(state.currentIndex - 1);
+    }
+
+    function nextQuestion() {
+      goToQuestion(state.currentIndex + 1);
+    }
+
+    function resetFinishArming() {
+      const btn = document.getElementById(`btn-finish-quiz`);
+      const lbl = document.getElementById(`label-finish-btn`);
+      const hint = document.getElementById(`submit-hint`);
+      if (btn) btn.dataset.armed = `false`;
+      if (lbl) lbl.textContent = `Kumpulkan Jawaban Tim`;
+      if (hint) {
+        hint.textContent = ``;
+        hint.hidden = true;
+      }
+    }
+
+    function handleFinishClick(btn) {
+      const answeredCount = Object.keys(state.answers).length;
+      const missing = QUESTIONS.length - answeredCount;
+      const hint = document.getElementById(`submit-hint`);
+      const lbl = document.getElementById(`label-finish-btn`);
+
+      if (missing > 0 && btn.dataset.armed !== `true`) {
+        btn.dataset.armed = `true`;
+        if (lbl) lbl.textContent = `Klik Sekali Lagi untuk Kumpulkan`;
+        if (hint) {
+          hint.textContent = `Perhatian: Masih ada ${missing} soal belum dijawab!`;
+          hint.hidden = false;
+        }
+        return;
+      }
+
+      state.phase = `finished`;
+      stopTimer();
+      dismissCheatModal();
+      saveAppState();
+      renderView();
+    }
+
+    function computeScoreStats() {
+      let correctCount = 0;
+      const tierStats = {
+        Mudah: { correct: 0, total: 0 },
+        Sukar: { correct: 0, total: 0 },
+        HOTS: { correct: 0, total: 0 }
+      };
+
+      QUESTIONS.forEach(function(q) {
+        tierStats[q.tier].total += 1;
+        if (state.answers[q.id] === q.correct) {
+          correctCount += 1;
+          tierStats[q.tier].correct += 1;
+        }
+      });
+
+      const pct = (correctCount / QUESTIONS.length) * 100;
+      return {
+        correctCount: correctCount,
+        total: QUESTIONS.length,
+        percentage: pct,
+        tierStats: tierStats
+      };
+    }
+
+    function renderResults() {
+      const stats = computeScoreStats();
+      const pctText = stats.percentage.toFixed(1).replace(`.`, `,`);
+
+      const titleEl = document.getElementById(`res-team-title`);
+      const memEl = document.getElementById(`res-team-members`);
+      if (titleEl) {
+        titleEl.textContent = state.teamClass ? `${state.teamName} · ${state.teamClass}` : state.teamName;
+      }
+      if (memEl) {
+        memEl.textContent = `Anggota Kelompok: ${state.members.join(`, `)}`;
+      }
+
+      const rawEl = document.getElementById(`res-score-raw`);
+      const scaleEl = document.getElementById(`res-score-scale`);
+      const pctEl = document.getElementById(`res-percent`);
+      const barEl = document.getElementById(`res-percent-bar`);
+      const durEl = document.getElementById(`res-duration`);
+      const durCapEl = document.getElementById(`res-duration-caption`);
+      const violEl = document.getElementById(`res-violations`);
+      const violCapEl = document.getElementById(`res-violations-caption`);
+      const violCard = document.getElementById(`res-violation-card`);
+      const integBadge = document.getElementById(`res-integrity-badge`);
+
+      if (rawEl) rawEl.textContent = `${stats.correctCount} / ${stats.total}`;
+      if (scaleEl) scaleEl.textContent = `Nilai Skala 100: ${pctText}`;
+      if (pctEl) pctEl.textContent = `${pctText}%`;
+      if (barEl) barEl.style.width = `${stats.percentage}%`;
+      if (durEl) durEl.textContent = formatDuration(state.elapsedSeconds);
+      if (durCapEl) durCapEl.textContent = `Durasi: ${formatDurationWords(state.elapsedSeconds)}`;
+
+      if (violEl) violEl.textContent = String(state.violations);
+      if (violCard) {
+        if (state.violations > 0) violCard.classList.add(`figure-card--danger`);
+        else violCard.classList.remove(`figure-card--danger`);
+      }
+      if (violCapEl) {
+        violCapEl.textContent = state.violations === 0
+          ? `Bersih — tidak ada perpindahan tab`
+          : `Tercatat ${state.violations} kali keluar layar kuis`;
+      }
+      if (integBadge) {
+        integBadge.innerHTML = state.violations === 0
+          ? `<span class="tag tag--positive">Integritas Bersih (0 Pelanggaran)</span>`
+          : `<span class="tag tag--error">Terdeteksi ${state.violations} Pelanggaran</span>`;
+      }
+
+      const logWrap = document.getElementById(`res-violation-log-wrap`);
+      const logBody = document.getElementById(`res-violation-log-body`);
+      if (logWrap && logBody) {
+        if (state.violationLog.length > 0) {
+          logWrap.hidden = false;
+          logBody.innerHTML = ``;
+          state.violationLog.forEach(function(item) {
+            const tr = document.createElement(`tr`);
+            tr.innerHTML = `<td>${item.no}</td><td>${item.time}</td><td>Soal No. ${item.questionNo}</td><td>${item.reason}</td>`;
+            logBody.appendChild(tr);
+          });
+        } else {
+          logWrap.hidden = true;
+          logBody.innerHTML = ``;
+        }
+      }
+
+      renderTeacherSection();
+    }
+
+    function renderTeacherSection() {
+      const gateBlock = document.getElementById(`teacher-gate-block`);
+      const panelBlock = document.getElementById(`teacher-panel-block`);
+      const reviewList = document.getElementById(`teacher-review-list`);
+
+      if (!state.teacherUnlocked) {
+        if (gateBlock) gateBlock.hidden = false;
+        if (panelBlock) panelBlock.hidden = true;
+        if (reviewList) reviewList.innerHTML = ``;
+        return;
+      }
+
+      if (gateBlock) gateBlock.hidden = true;
+      if (panelBlock) panelBlock.hidden = false;
+
+      const stats = computeScoreStats();
+      const summaryGrid = document.getElementById(`teacher-tier-summary`);
+      if (summaryGrid) {
+        summaryGrid.innerHTML = `
+          <div class="figure-card">
+            <span class="field-label">Tingkat Mudah (No. 1–5)</span>
+            <div class="figure-value">${stats.tierStats.Mudah.correct} / ${stats.tierStats.Mudah.total}</div>
+            <div class="figure-caption">Konsep dasar &amp; substitusi langsung</div>
+          </div>
+          <div class="figure-card">
+            <span class="field-label">Tingkat Sukar (No. 6–10)</span>
+            <div class="figure-value">${stats.tierStats.Sukar.correct} / ${stats.tierStats.Sukar.total}</div>
+            <div class="figure-caption">Teorema usaha-EK, pegas &amp; daya</div>
+          </div>
+          <div class="figure-card">
+            <span class="field-label">Tingkat HOTS (No. 11–15)</span>
+            <div class="figure-value">${stats.tierStats.HOTS.correct} / ${stats.tierStats.HOTS.total}</div>
+            <div class="figure-caption">Penalaran kekekalan EM &amp; efisiensi</div>
+          </div>
+        `;
+      }
+
+      const filterRow = document.getElementById(`teacher-filter-row`);
+      const filters = [
+        { id: `all`, label: `Semua (15)` },
+        { id: `wrong`, label: `Salah / Kosong` },
+        { id: `correct`, label: `Benar` },
+        { id: `Mudah`, label: `Mudah` },
+        { id: `Sukar`, label: `Sukar` },
+        { id: `HOTS`, label: `HOTS` }
+      ];
+      if (filterRow) {
+        filterRow.innerHTML = ``;
+        filters.forEach(function(f) {
+          const btn = document.createElement(`button`);
+          btn.type = `button`;
+          btn.className = state.teacherFilter === f.id ? `btn btn--sm btn--primary` : `btn btn--sm`;
+          btn.textContent = f.label;
+          btn.onclick = function() {
+            state.teacherFilter = f.id;
+            renderTeacherSection();
+          };
+          filterRow.appendChild(btn);
+        });
+      }
+
+      if (reviewList) {
+        reviewList.innerHTML = ``;
+        const filtered = QUESTIONS.filter(function(q) {
+          const teamAns = state.answers[q.id] || ``;
+          const isCorrect = teamAns === q.correct;
+          if (state.teacherFilter === `wrong`) return !isCorrect;
+          if (state.teacherFilter === `correct`) return isCorrect;
+          if (state.teacherFilter === `Mudah` || state.teacherFilter === `Sukar` || state.teacherFilter === `HOTS`) {
+            return q.tier === state.teacherFilter;
+          }
+          return true;
+        });
+
+        if (filtered.length === 0) {
+          const empty = document.createElement(`div`);
+          empty.className = `block block--paper`;
+          empty.textContent = `Tidak ada soal pada filter ini.`;
+          reviewList.appendChild(empty);
+        } else {
+          filtered.forEach(function(q) {
+            const teamAnsKey = state.answers[q.id] || ``;
+            const isCorrect = teamAnsKey === q.correct;
+            const teamOpt = q.options.find(function(o) { return o.key === teamAnsKey; });
+            const keyOpt = q.options.find(function(o) { return o.key === q.correct; });
+
+            const card = document.createElement(`article`);
+            card.className = `review-card ${isCorrect ? `review-card--correct` : `review-card--wrong`}`;
+
+            const topRow = document.createElement(`div`);
+            topRow.style.display = `flex`;
+            topRow.style.flexWrap = `wrap`;
+            topRow.style.justifyContent = `space-between`;
+            topRow.style.alignItems = `center`;
+            topRow.style.gap = `var(--space-sm)`;
+
+            const leftTags = document.createElement(`div`);
+            leftTags.style.display = `flex`;
+            leftTags.style.flexWrap = `wrap`;
+            leftTags.style.gap = `var(--space-sm)`;
+            leftTags.innerHTML = `
+              <span class="tag tag--black">Soal #${q.id}</span>
+              <span class="tag">${q.tier}</span>
+              <span class="tag tag--blue">${q.topic}</span>
+            `;
+
+            const statusTag = document.createElement(`span`);
+            statusTag.className = isCorrect ? `tag tag--positive` : `tag tag--error`;
+            statusTag.textContent = isCorrect ? `BENAR` : (teamAnsKey ? `SALAH` : `TIDAK DIJAWAB`);
+
+            topRow.appendChild(leftTags);
+            topRow.appendChild(statusTag);
+
+            const qPara = document.createElement(`p`);
+            qPara.style.margin = `0`;
+            qPara.style.fontWeight = `700`;
+            qPara.style.fontSize = `var(--subhead-size)`;
+            qPara.textContent = q.text;
+
+            const ansGrid = document.createElement(`div`);
+            ansGrid.className = `review-answers`;
+
+            const teamBox = document.createElement(`div`);
+            teamBox.className = `answer-box ${isCorrect ? `answer-box--key` : `answer-box--wrong`}`;
+            teamBox.innerHTML = `
+              <div class="field-label">Jawaban Tim</div>
+              <div style="margin-top: var(--space-xs); font-weight: 700;">
+                ${teamOpt ? `${teamOpt.key}. ${teamOpt.label}` : `Tidak Dijawab`}
+              </div>
+            `;
+
+            const keyBox = document.createElement(`div`);
+            keyBox.className = `answer-box answer-box--key`;
+            keyBox.innerHTML = `
+              <div class="field-label">Kunci Jawaban Benar</div>
+              <div style="margin-top: var(--space-xs); font-weight: 700;">
+                ${keyOpt ? `${keyOpt.key}. ${keyOpt.label}` : q.correct}
+              </div>
+            `;
+
+            ansGrid.appendChild(teamBox);
+            ansGrid.appendChild(keyBox);
+
+            const expBox = document.createElement(`div`);
+            expBox.className = `explanation-box`;
+            expBox.innerHTML = `
+              <div class="field-label">Uraian Pembahasan</div>
+              <p style="margin: var(--space-xs) 0 0;">${q.explanation}</p>
+            `;
+
+            card.appendChild(topRow);
+            card.appendChild(qPara);
+            card.appendChild(ansGrid);
+            card.appendChild(expBox);
+            reviewList.appendChild(card);
+          });
+          renderKaTeXIn(reviewList);
+        }
+      }
+    }
+
+    function toggleTeacherCodeVisibility() {
+      const input = document.getElementById(`input-teacher-code`);
+      const btn = document.getElementById(`btn-toggle-code-vis`);
+      if (!input || !btn) return;
+      if (input.type === `password`) {
+        input.type = `text`;
+        btn.innerHTML = `<i data-lucide="eye-off" width="18" height="18" aria-hidden="true"></i><span>Sembunyikan</span>`;
+      } else {
+        input.type = `password`;
+        btn.innerHTML = `<i data-lucide="eye" width="18" height="18" aria-hidden="true"></i><span>Tampilkan</span>`;
+      }
+      refreshIcons();
+    }
+
+    function handleTeacherKeydown(evt) {
+      if (evt.key === `Enter`) {
+        evt.preventDefault();
+        unlockTeacherPanel();
+      }
+    }
+
+    function unlockTeacherPanel() {
+      const input = document.getElementById(`input-teacher-code`);
+      const errBox = document.getElementById(`teacher-gate-error`);
+      const errTxt = document.getElementById(`teacher-gate-error-text`);
+      if (!input) return;
+
+      const entered = input.value.trim().toUpperCase();
+      if (entered !== TEACHER_ACCESS_CODE) {
+        if (errTxt) errTxt.textContent = `Kode akses salah. Masukkan kode akses guru yang benar untuk membuka kunci jawaban & pembahasan.`;
+        if (errBox) errBox.hidden = false;
+        return;
+      }
+
+      if (errBox) errBox.hidden = true;
+      input.value = ``;
+      state.teacherUnlocked = true;
+      saveAppState();
+      renderTeacherSection();
+      refreshIcons();
+    }
+
+    function lockTeacherPanel() {
+      state.teacherUnlocked = false;
+      saveAppState();
+      renderTeacherSection();
+      refreshIcons();
+    }
+
+    function exportReportCSV() {
+      if (!state.teacherUnlocked) return;
+      const stats = computeScoreStats();
+      const lines = [
+        `Laporan Kuis Beregu Usaha dan Energi Kelas XI`,
+        `Nama Tim,"${state.teamName.replace(/"/g, `""`)}"`,
+        `Kelas,"${state.teamClass.replace(/"/g, `""`)}"`,
+        `Anggota,"${state.members.join(`, `).replace(/"/g, `""`)}"`,
+        `Skor Akhir,${stats.correctCount}/${stats.total}`,
+        `Persentase,${stats.percentage.toFixed(1)}%`,
+        `Waktu Pengerjaan,${formatDuration(state.elapsedSeconds)}`,
+        `Jumlah Pelanggaran,${state.violations}`,
+        ``,
+        `No Soal,Tingkat,Topik,Jawaban Tim,Kunci Benar,Status`
+      ];
+
+      QUESTIONS.forEach(function(q) {
+        const ans = state.answers[q.id] || `Kosong`;
+        const status = ans === q.correct ? `Benar` : `Salah`;
+        lines.push(`${q.id},${q.tier},"${q.topic}",${ans},${q.correct},${status}`);
+      });
+
+      const csv = lines.join(`\n`);
+      const safeName = (state.teamName || `tim`).toLowerCase().replace(/[^a-z0-9]+/g, `-`);
+      if (window.notebookAppApi && typeof window.notebookAppApi.triggerFileDownload === `function`) {
+        window.notebookAppApi.triggerFileDownload({
+          content: csv,
+          contentType: `text/csv`,
+          encoding: `UTF-8`,
+          filename: `hasil-kuis-${safeName}.csv`
+        });
+      }
+    }
+
+    function resetForNewTeam(btn) {
+      if (btn && btn.dataset.armed !== `true`) {
+        btn.dataset.armed = `true`;
+        btn.innerHTML = `<i data-lucide="alert-circle" width="20" height="20" aria-hidden="true"></i><span>Klik Sekali Lagi untuk Reset Sesi</span>`;
+        refreshIcons();
+        return;
+      }
+      if (btn) btn.dataset.armed = `false`;
+      stopTimer();
+      const keepXL = state.projectorXL;
+      state = defaultState();
+      state.projectorXL = keepXL;
+      saveAppState();
+      renderView();
+    }
+
+    function renderView() {
+      const regView = document.getElementById(`view-register`);
+      const arenaView = document.getElementById(`view-arena`);
+      const resView = document.getElementById(`view-results`);
+
+      applyProjectorClass();
+
+      if (regView) regView.hidden = state.phase !== `register`;
+      if (arenaView) arenaView.hidden = state.phase !== `playing`;
+      if (resView) resView.hidden = state.phase !== `finished`;
+
+      if (state.phase === `register`) {
+        const nameEl = document.getElementById(`input-team-name`);
+        const clsEl = document.getElementById(`input-team-class`);
+        if (nameEl) nameEl.value = state.teamName || ``;
+        if (clsEl) clsEl.value = state.teamClass || ``;
+        if (!Array.isArray(state.members) || state.members.length === 0) {
+          state.members = [``, ``, ``];
+        }
+        renderMembersInputs();
+        hideRegisterError();
+      } else if (state.phase === `playing`) {
+        renderCurrentQuestion();
+        startTimer();
+      } else if (state.phase === `finished`) {
+        stopTimer();
+        renderResults();
+      }
+
+      const newTeamBtn = document.getElementById(`btn-new-team`);
+      if (newTeamBtn) {
+        newTeamBtn.dataset.armed = `false`;
+        newTeamBtn.innerHTML = `<i data-lucide="rotate-ccw" width="20" height="20" aria-hidden="true"></i><span>Mulai Sesi Tim Baru</span>`;
+      }
+
+      refreshIcons();
+    }
+
+    function setupAntiCheatListeners() {
+      document.addEventListener(`visibilitychange`, function() {
+        if (document.hidden && state.phase === `playing`) {
+          recordCheatViolation(`Berpindah tab atau menyembunyikan layar kuis`);
+        }
+      });
+
+      window.addEventListener(`blur`, function() {
+        if (state.phase === `playing` && !cheatModalOpen) {
+          recordCheatViolation(`Fokus keluar dari jendela browser kuis`);
+        }
+      });
+    }
+
+    async function initApp() {
+      setupAntiCheatListeners();
+      try {
+        if (window.notebookAppApi && typeof window.notebookAppApi.getAppState === `function`) {
+          const saved = await window.notebookAppApi.getAppState();
+          if (saved && typeof saved === `object` && saved.phase) {
+            state = Object.assign(defaultState(), saved);
+          }
+        }
+      } catch (e) {}
+
+      renderView();
+
+      if (window.notebookAppApi && typeof window.notebookAppApi.notifyAppReady === `function`) {
+        window.notebookAppApi.notifyAppReady();
+      }
+    }
+
+    if (document.readyState === `loading`) {
+      document.addEventListener(`DOMContentLoaded`, initApp);
+    } else {
+      initApp();
+    }
+  </script>
+</body>
+</html>
